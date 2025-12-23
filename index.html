@@ -44,8 +44,8 @@
   </header>
 
   <main id="main" class="main">
-    <section class="hero" aria-label="Hero section">
-      <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+    <section class="hero static-bg" aria-label="Hero section">
+      <!-- static-bg class uses CSS neon/gradient, no JS -->
       <div class="container hero-grid">
         <div class="hero-content">
           <h1 class="hero-title">Designing tomorrow's interfaces, today.</h1>
@@ -64,7 +64,7 @@
         <div class="hero-visual" aria-hidden="true">
           <div class="card glass neon">
             <div class="avatar">
-              <!-- Replace placeholder with your headshot at assets/me.jpg -->
+              <!-- Replace with your image -->
               <img src="assets/me.jpg" alt="Fadhil Akbar" onerror="this.style.opacity=0.4;">
             </div>
             <div class="info">
@@ -78,7 +78,7 @@
         </div>
       </div>
     </section>
-
+    <!-- The rest is unchanged, see previous index.html (about, projects, skills, contact, footer) -->
     <section id="about" class="section about container">
       <header class="section-header">
         <h2>About</h2>
@@ -98,15 +98,12 @@
         </div>
       </div>
     </section>
-
     <section id="projects" class="section projects container">
       <header class="section-header">
         <h2>Selected Projects</h2>
         <p class="muted">A curated selection — more in the GitHub repo.</p>
       </header>
-
       <div class="cards-grid">
-        <!-- Project card template, duplicate/edit for real projects -->
         <article class="card project">
           <div class="thumb" role="img" aria-label="Project A screenshot">
             <img src="assets/project-1.jpg" alt="Project A screenshot" onerror="this.style.opacity=0.4;">
@@ -120,7 +117,6 @@
             </p>
           </div>
         </article>
-
         <article class="card project">
           <div class="thumb" role="img" aria-label="Project B screenshot">
             <img src="assets/project-2.jpg" alt="Project B screenshot" onerror="this.style.opacity=0.4;">
@@ -134,17 +130,13 @@
             </p>
           </div>
         </article>
-
-        <!-- Add more project cards as needed -->
       </div>
     </section>
-
     <section id="skills" class="section skills container">
       <header class="section-header">
         <h2>Skills</h2>
         <p class="muted">Tools, libraries and methodologies I use.</p>
       </header>
-
       <div class="skill-columns">
         <ul>
           <li>JavaScript / TypeScript</li>
@@ -163,13 +155,11 @@
         </ul>
       </div>
     </section>
-
     <section id="contact" class="section contact container">
       <header class="section-header">
         <h2>Contact</h2>
         <p class="muted">Let's build something future-forward.</p>
       </header>
-
       <div class="contact-grid">
         <form class="contact-form" action="mailto:you@example.com" method="post" enctype="text/plain" aria-label="Contact form">
           <div class="field-row">
@@ -189,7 +179,6 @@
             <button type="reset" class="btn ghost">Reset</button>
           </p>
         </form>
-
         <aside class="contact-details" aria-label="Contact details">
           <p>Prefer email? <a href="mailto:you@example.com">you@example.com</a></p>
           <p>Or connect via <a href="https://github.com/FadhilAkbarC" target="_blank" rel="noopener">GitHub</a> and <a href="#" target="_blank" rel="noopener">LinkedIn</a>.</p>
@@ -201,7 +190,6 @@
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="copyright">
@@ -214,7 +202,6 @@
       </div>
     </div>
   </footer>
-
-  <script src="script.js" type="module"></script>
+  <script src="script.js"></script>
 </body>
 </html>
