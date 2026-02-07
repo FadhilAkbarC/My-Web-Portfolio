@@ -1,169 +1,322 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fadhil Akbar — Futuristic Portfolio</title>
-  <meta name="description" content="Engaging, interactive, professional portfolio of Fadhil Akbar. Futuristic, space-optimized UI." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <meta name="theme-color" content="#0b0f16">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Roblox Studio Explorer Final</title>
+<style>
+    /* --- KONFIGURASI TAMPILAN --- */
+    :root {
+        --bg-color: #222222;
+        --bg-hover: #2e2e2e;
+        --bg-select: #0d47a1; /* Biru tua khas seleksi */
+        --text-color: #cccccc;
+        --text-dim: #777777;
+        --line-color: #383838;
+        
+        --row-height: 20px;   /* SANGAT RAPAT */
+        --font-size: 12px;    /* Ukuran font IDE standar */
+        --indent: 18px;       /* Indentasi per level */
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: var(--font-size);
+        overflow: hidden; /* Mencegah scroll body, hanya container yg scroll */
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        user-select: none; /* Agar teks tidak terblok saat klik cepat */
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER STYLE */
+    .header {
+        height: 30px;
+        background-color: #2b2b2b;
+        border-bottom: 1px solid #111;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    /* CONTAINER UTAMA */
+    .explorer-scroller {
+        flex: 1;
+        overflow-y: overlay; /* Scrollbar overlay jika didukung */
+        overflow-x: auto;
+        padding-bottom: 40px;
+    }
+
+    /* Custom Scrollbar (Tipis & Gelap) */
+    .explorer-scroller::-webkit-scrollbar { width: 10px; height: 10px; }
+    .explorer-scroller::-webkit-scrollbar-track { background: transparent; }
+    .explorer-scroller::-webkit-scrollbar-thumb { background: #444; border: 2px solid var(--bg-color); border-radius: 6px; }
+    .explorer-scroller::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    /* STRUKTUR TREE */
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Logika Indentasi & Garis Hierarki */
+    ul ul {
+        padding-left: var(--indent);
+        position: relative;
+    }
+
+    /* Garis Vertikal (Guide Line) */
+    ul ul::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 8px; /* Posisi garis pas di tengah indentasi */
+        border-left: 1px solid var(--line-color);
+        opacity: 0.6;
+    }
+
+    li {
+        position: relative;
+    }
+
+    /* BARIS ITEM (ROW) */
+    .row {
+        display: flex;
+        align-items: center;
+        height: var(--row-height);
+        cursor: pointer;
+        padding-right: 10px;
+        white-space: nowrap;
+        position: relative; /* Untuk z-index */
+        transition: background 0.05s ease;
+    }
+
+    .row:hover { background-color: var(--bg-hover); }
+    .row.selected { background-color: var(--bg-select); color: #fff; }
+
+    /* AREA KLIK PANAH & ICON */
+    .toggle-box {
+        width: 16px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
+
+    .toggle-box svg {
+        width: 8px; 
+        height: 8px; 
+        fill: currentColor; 
+        transition: transform 0.15s ease;
+    }
+
+    /* Rotasi Panah */
+    li.collapsed > .row > .toggle-box svg { transform: rotate(-90deg); }
+    li.leaf > .row > .toggle-box { visibility: hidden; } /* Sembunyikan panah jika tidak ada anak */
+
+    .icon-box {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .icon-box svg { width: 100%; height: 100%; }
+
+    /* LABEL TEXT */
+    .label {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: var(--row-height);
+    }
+
+    /* VISIBILITAS ANAK */
+    li.collapsed > ul { display: none; }
+
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header glass">
-    <div class="container header-grid">
-      <a class="brand" href="#" aria-label="Fadhil Akbar home">
-        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#18F6FF"/>
-            </linearGradient>
-          </defs>
-          <rect rx="5" width="24" height="24" fill="url(#g)"></rect>
-        </svg>
-        <span class="brand-text">Fadhil Akbar</span>
-      </a>
-      <nav class="nav" aria-label="Primary navigation">
-        <ul>
-          <li><a href="#about" data-accordion="about">About</a></li>
-          <li><a href="#projects" data-accordion="projects">Projects</a></li>
-          <li><a href="#skills" data-accordion="skills">Skills</a></li>
-          <li><a href="#contact" data-accordion="contact">Contact</a></li>
+
+<div class="header">Explorer</div>
+
+<div class="explorer-scroller">
+    <ul id="tree-root">
         </ul>
-      </nav>
-      <div class="header-actions">
-        <button id="themeToggle" class="btn-icon" aria-pressed="false" title="Toggle theme">
-          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a1 1 0 010 2 7 7 0 100 14 1 1 0 010 2 9 9 0 110-18z"/></svg>
-        </button>
-        <a class="btn primary glow" href="assets/resume.pdf" download>Resume</a>
-      </div>
-    </div>
-  </header>
+</div>
 
-  <main id="main" class="main">
-    <section class="hero hero-engage static-bg glass">
-      <div class="hero-overlay"></div>
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <div class="avatar-xl card glass neon">
-            <img src="assets/me.jpg" alt="Fadhil Akbar" onerror="this.style.opacity=0.4;">
-          </div>
-          <h1>Fadhil Akbar</h1>
-          <h2 class="hero-title subheading">UI Engineer. Creative Technologist.</h2>
-          <div class="hero-cta-row">
-            <a class="btn primary glow" href="#projects" data-accordion="projects">Projects</a>
-            <a class="btn ghost" href="#contact" data-accordion="contact">Contact</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<script>
+    // --- 1. OPTIMIZED ICON LIBRARY (SVG) ---
+    // Menggunakan path vector untuk ketajaman maksimal dan performa ringan.
+    const ICONS = {
+        arrow: '<path d="M2 6L8 12L14 6H2Z" />',
+        
+        // Colors
+        blue: '#52BAFF', green: '#00C853', yellow: '#FFC107', orange: '#FF9800', 
+        red: '#FF5252', purple: '#E040FB', white: '#E0E0E0', gray: '#9E9E9E',
 
-    <div id="app-panels">
-      <section id="about" class="panel glass neon active" tabIndex="0" aria-labelledby="nav-about">
-        <header class="section-header">
-          <h2 id="nav-about">About</h2>
-        </header>
-        <div class="panel-content about-grid">
-          <div>
-            <p>🚀 I craft high-performance, accessible user interfaces with a futuristic touch. My passion is in micro-interactions, clean layouts, and blending motion with usability.</p>
-            <p>🔬 Always shipping new features, open to exciting remote & hybrid opportunities.</p>
-          </div>
-          <ul class="about-stats">
-            <li><strong>8+</strong><span>Years exp</span></li>
-            <li><strong>30+</strong><span>Projects</span></li>
-            <li><strong>5</strong><span>FOSS contribs</span></li>
-          </ul>
-        </div>
-      </section>
-      <section id="projects" class="panel glass neon" tabIndex="0" aria-labelledby="nav-projects">
-        <header class="section-header">
-          <h2 id="nav-projects">Projects</h2>
-        </header>
-        <div class="panel-content projects cards-grid">
-          <article class="card project interactive">
-            <div class="thumb" role="img" aria-label="Dashboard App screenshot">
-              <img src="assets/project-1.jpg" alt="Project A" onerror="this.style.opacity=0.4;">
-            </div>
-            <div class="card-body">
-              <h3>Futuristic Dashboard</h3>
-              <p>Real-time analytics, glassy gradients, and accessible visualizations.</p>
-              <div class="card-actions">
-                <a href="#" class="btn small glow">Live</a>
-                <a href="#" class="btn small ghost">Source</a>
-              </div>
-            </div>
-          </article>
-          <article class="card project interactive">
-            <div class="thumb" role="img" aria-label="WebGL App screenshot">
-              <img src="assets/project-2.jpg" alt="Project B" onerror="this.style.opacity=0.4;">
-            </div>
-            <div class="card-body">
-              <h3>3D Product Explorer</h3>
-              <p>Immersive product view (WebGL), fallback for all devices.</p>
-              <div class="card-actions">
-                <a href="#" class="btn small glow">Live</a>
-                <a href="#" class="btn small ghost">Source</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-      <section id="skills" class="panel glass neon" tabIndex="0" aria-labelledby="nav-skills">
-        <header class="section-header">
-          <h2 id="nav-skills">Skills</h2>
-        </header>
-        <div class="panel-content skill-columns">
-          <ul>
-            <li>JavaScript/TypeScript</li>
-            <li>React / Next.js</li>
-            <li>CSS / Tailwind</li>
-          </ul>
-          <ul>
-            <li>WebGL / three.js</li>
-            <li>Performance/Testing</li>
-            <li>Accessibility</li>
-          </ul>
-          <ul>
-            <li>Figma/Design Systems</li>
-            <li>Node.js / APIs</li>
-            <li>Serverless/Edge</li>
-          </ul>
-        </div>
-      </section>
-      <section id="contact" class="panel glass neon" tabIndex="0" aria-labelledby="nav-contact">
-        <header class="section-header">
-          <h2 id="nav-contact">Contact</h2>
-        </header>
-        <div class="panel-content contact-grid">
-          <form class="contact-form" action="mailto:you@example.com" method="post" enctype="text/plain" aria-label="Contact form">
-            <label for="name">Name</label>
-            <input id="name" name="name" required placeholder="Your name">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required placeholder="you@domain.com">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" placeholder="Brief message"></textarea>
-            <div class="form-actions">
-              <button type="submit" class="btn primary glow">Send</button>
-              <button type="reset" class="btn ghost">Reset</button>
-            </div>
-          </form>
-        </div>
-      </section>
-    </div>
-  </main>
+        // Services
+        workspace: '<path fill="#52BAFF" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 12a5 5 0 110-10 5 5 0 010 10z"/><circle fill="#52BAFF" cx="8" cy="8" r="2.5"/>',
+        lighting: '<path fill="#FF9800" d="M8 1c-3 0-5 2-5 5 0 2 2 4 3 4.5V12h4v-1.5c1-.5 3-2.5 3-4.5 0-3-2-5-5-5zm-1 12h2v2H7v-2z"/>',
+        
+        // Storage
+        repStorage: '<path fill="#FFC107" d="M1 4h14v10H1z"/><path fill="#fff" d="M5 8h6M8 5v6" opacity="0.8"/>',
+        repFirst: '<path fill="#52BAFF" d="M1 4h14v10H1z"/><path fill="#fff" d="M4 6l3 3 3-3" opacity="0.9"/>',
+        svrScript: '<path fill="#00C853" d="M2 3h12v11H2z"/><path fill="#fff" d="M4 5h8M4 8h6" opacity="0.7"/>',
+        svrStorage: '<path fill="#52BAFF" d="M2 3h12v11H2z"/><rect fill="#fff" x="4" y="6" width="8" height="5" opacity="0.5"/>',
+        
+        // Items
+        folder: '<path fill="#FFC107" d="M1 3h5l2 2h7v9H1z"/>',
+        part: '<path fill="#E0E0E0" d="M2 4l6-3 6 3v8l-6 3-6-3V4z" opacity="0.9"/>',
+        model: '<path fill="#fff" d="M2 13h4V9H2v4zm5 0h4V9H7v4zm5 0h4V9h-4v4zM2 8h4V4H2v4zm5 0h4V4H7v4zm5 0h4V4h-4v4z"/>',
+        
+        // Scripts
+        script: '<path fill="#9E9E9E" d="M3 2h10v12H3z"/><path fill="#fff" d="M5 5h6M5 8h6M5 11h4"/>',
+        local: '<path fill="#52BAFF" d="M3 2h10v12H3z"/><path fill="#fff" d="M8 10a2 2 0 100-4 2 2 0 000 4zm-2 3h4c0-1.5-1-2-2-2s-2 .5-2 2z"/>',
+        module: '<path fill="#AB47BC" d="M3 2h10v12H3z"/><path fill="#fff" d="M5 11l2-2-2-2M9 11l-2-2 2-2"/>',
+        
+        // UI & Sound
+        screenGui: '<rect stroke="#00C853" stroke-width="2" fill="none" x="2" y="3" width="12" height="10"/>',
+        frame: '<rect fill="#E0E0E0" opacity="0.5" x="2" y="4" width="12" height="8"/>',
+        sound: '<path fill="#E040FB" d="M2 5v6h4l5 5V0L6 5H2z"/>',
+        chat: '<path fill="#52BAFF" d="M2 2h12v9H2zM4 14l3-3"/>',
+        players: '<path fill="#E0E0E0" d="M8 8a3 3 0 100-6 3 3 0 000 6zm-5 7h10c0-2-2-3-5-3s-5 1-5 3z"/>'
+    };
 
-  <footer class="site-footer glass">
-    <div class="container footer-grid">
-      <small>© <span id="year"></span> Fadhil Akbar — Built with care and a touch of neon.</small>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="https://github.com/FadhilAkbarC/My-Web-Portfolio" target="_blank" rel="noopener">Source</a>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    // --- 2. DATA HIERARKI (COMPLEX & DEEP) ---
+    // n=name, i=icon key, c=children
+    const data = [
+        { n: "Workspace", i: "workspace", c: [
+            { n: "Camera", i: "part" },
+            { n: "Baseplate", i: "part", c: [{n: "Texture", i: "part"}] },
+            { n: "SpawnLocation", i: "part", c: [{n: "Decal", i: "part"}] },
+            { n: "Map", i: "folder", c: [
+                { n: "CityCenter", i: "model", c: [
+                    { n: "Roads", i: "folder", c: [{n: "Asphalt", i: "part"}, {n: "Lines", i: "part"}] },
+                    { n: "Buildings", i: "folder", c: [{n: "Skyscraper", i: "model"}, {n: "Shop", i: "model"}] }
+                ]}
+            ]}
+        ]},
+        { n: "Players", i: "players", c: [
+            { n: "LocalPlayer", i: "players", c: [
+                { n: "PlayerGui", i: "folder", c: [{n: "MainHUD", i: "screenGui"}] },
+                { n: "PlayerScripts", i: "folder", c: [{n: "ControlScript", i: "local"}]}
+            ]}
+        ]},
+        { n: "Lighting", i: "lighting", c: [
+            { n: "Sky", i: "part" }, { n: "Bloom", i: "part" }, { n: "SunRays", i: "part" }
+        ]},
+        { n: "ReplicatedFirst", i: "repFirst", c: [
+            { n: "LoadingSystem", i: "local", c: [{n: "Config", i: "module"}]}
+        ]},
+        { n: "ReplicatedStorage", i: "repStorage", c: [
+            { n: "Shared", i: "folder", c: [
+                { n: "Events", i: "folder", c: [{n: "OnHit", i: "part"}, {n: "OnData", i: "part"}] },
+                { n: "Items", i: "folder", c: [{n: "Sword", i: "model"}, {n: "Potion", i: "model"}] }
+            ]}
+        ]},
+        { n: "ServerScriptService", i: "svrScript", c: [
+            { n: "GameCore", i: "script", c: [
+                { n: "DataManager", i: "module" },
+                { n: "Matchmaking", i: "module" }
+            ]},
+            { n: "AdminSystem", i: "folder", c: [{n: "Commands", i: "script"}]}
+        ]},
+        { n: "ServerStorage", i: "svrStorage", c: [
+            { n: "Maps", i: "folder", c: [{n: "Map1", i: "model"}, {n: "Map2", i: "model"}]}
+        ]},
+        { n: "StarterGui", i: "folder", c: [
+            { n: "MainMenu", i: "screenGui", c: [{n: "PlayBtn", i: "frame"}, {n: "SettingsBtn", i: "frame"}]}
+        ]},
+        { n: "StarterPack", i: "folder", c: [
+            { n: "Tool", i: "part", c: [{n: "Handle", i: "part"}]}
+        ]},
+        { n: "SoundService", i: "sound", c: [
+            { n: "BGM", i: "sound"}, { n: "SFX", i: "folder"}
+        ]},
+        { n: "Chat", i: "chat", c: [
+            { n: "ChatService", i: "folder", c: [{n: "ChatModules", i: "folder"}]}
+        ]}
+    ];
+
+    // --- 3. HIGH PERFORMANCE RENDERER ---
+    function buildHTML(nodes) {
+        let html = '';
+        for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            const hasKids = node.c && node.c.length > 0;
+            const iconSvg = ICONS[node.i] || ICONS.part;
+            
+            // Render satu item (li) dan rekursif untuk anak-anaknya (ul)
+            // Class 'expanded' default terbuka. Gunakan 'collapsed' jika ingin tertutup default.
+            html += `
+            <li class="${hasKids ? 'expanded' : 'leaf'}">
+                <div class="row">
+                    <div class="toggle-box">
+                        ${hasKids ? `<svg viewBox="0 0 16 16">${ICONS.arrow}</svg>` : ''}
+                    </div>
+                    <div class="icon-box">
+                        <svg viewBox="0 0 16 16">${iconSvg}</svg>
+                    </div>
+                    <span class="label">${node.n}</span>
+                </div>
+                ${hasKids ? `<ul>${buildHTML(node.c)}</ul>` : ''}
+            </li>`;
+        }
+        return html;
+    }
+
+    // Injeksi HTML sekaligus (Tercepat)
+    document.getElementById('tree-root').innerHTML = buildHTML(data);
+
+    // --- 4. LOGIKA INTERAKSI (SMART DETECTOR) ---
+    const treeRoot = document.getElementById('tree-root');
+
+    treeRoot.addEventListener('click', (e) => {
+        // Deteksi klik pada baris (row)
+        const row = e.target.closest('.row');
+        if (!row) return;
+
+        // 1. Logika Seleksi (Highlight Biru)
+        const currentSelected = treeRoot.querySelector('.selected');
+        if (currentSelected) currentSelected.classList.remove('selected');
+        row.classList.add('selected');
+
+        // 2. Logika Expand/Collapse
+        // Mengambil elemen parent <li>
+        const li = row.parentElement;
+        
+        // Cek apakah item ini punya anak (bukan leaf)
+        if (!li.classList.contains('leaf')) {
+            // Toggle class collapsed
+            li.classList.toggle('collapsed');
+            
+            // Opsional: Jika ingin menutup, kita juga hapus expanded agar sinkron visual panah
+            // (CSS sudah menangani rotasi berdasarkan .collapsed)
+        }
+    });
+
+</script>
+
 </body>
 </html>
