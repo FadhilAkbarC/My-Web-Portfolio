@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Host: fadhil.qzz.io
 Sitemap: https://fadhil.qzz.io/sitemap.xml

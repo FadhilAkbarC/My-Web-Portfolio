@@ -5,19 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fadhil Akbar Cariearsa | Fadhil Akbar | Cariearsa Official Portfolio</title>
   <meta name="description" content="Official Fadhil Akbar Cariearsa portfolio for Fadhil and Fadhil Akbar search queries. Explore Cariearsa projects, TypeScript JavaScript HTML CSS Luau Lua progress, and verified profile information." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large" />
   <meta name="theme-color" content="#060913" />
   <meta name="keywords" content="Fadhil, Fadhil Akbar, Cariearsa, Fadhil Akbar Cariearsa, Fadhil portfolio" />
   <meta name="author" content="Fadhil Akbar" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="canonical" href="https://fadhil.qzz.io/" />
+  <link rel="alternate" hreflang="en" href="https://fadhil.qzz.io/" />
+  <link rel="alternate" hreflang="x-default" href="https://fadhil.qzz.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Fadhil Akbar Cariearsa | Official Portfolio" />
   <meta property="og:description" content="Official Fadhil Akbar Cariearsa portfolio for Fadhil and Fadhil Akbar searches, featuring projects, skills, and web/game tools." />
   <meta property="og:url" content="https://fadhil.qzz.io/" />
   <meta property="og:site_name" content="Fadhil Learning Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://fadhil.qzz.io/og-image.jpg" />
+  <meta property="og:image:alt" content="Fadhil Akbar Cariearsa official portfolio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Fadhil Akbar Cariearsa | Official Portfolio" />
   <meta name="twitter:description" content="Find Fadhil Akbar Cariearsa projects, skills, and portfolio links in one official page." />
+  <meta name="twitter:image" content="https://fadhil.qzz.io/og-image.jpg" />
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -310,6 +320,24 @@
       contain-intrinsic-size: auto 200px;
     }
 
+
+    #hacker-rain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.95;
+      mix-blend-mode: screen;
+    }
+
+    .shell,
+    .viewport {
+      position: relative;
+      z-index: 1;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -323,6 +351,10 @@
       .cyber-typed {
         clip-path: inset(0 0 0 0);
         border-right-color: transparent;
+      }
+
+      #hacker-rain {
+        display: none;
       }
     }
 
@@ -417,6 +449,35 @@
       "keywords": ["Fadhil", "Fadhil Akbar", "Cariearsa", "Fadhil Akbar Cariearsa"]
     }
   </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Fadhil Akbar",
+        "alternateName": ["Fadhil", "Fadhil Akbar Cariearsa", "Cariearsa"],
+        "url": "https://fadhil.qzz.io/"
+      },
+      "url": "https://fadhil.qzz.io/",
+      "name": "Fadhil Akbar Cariearsa | Official Portfolio"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Fadhil Akbar Cariearsa Official Portfolio",
+      "url": "https://fadhil.qzz.io/",
+      "isPartOf": {
+        "@type": "WebSite",
+        "url": "https://fadhil.qzz.io/",
+        "name": "Fadhil Akbar Cariearsa Portfolio"
+      },
+      "about": ["Fadhil", "Fadhil Akbar", "Fadhil Akbar Cariearsa", "Cariearsa"]
+    }
+  </script>
 </head>
 <body>
   <main class="viewport">
@@ -478,5 +539,51 @@
       </article>
     </section>
   </main>
+  <canvas id="hacker-rain" aria-hidden="true"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('hacker-rain');
+      if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+      const chars = 'FADHILAKBARCARIEARSA01<>/{}[]TSJSHCSSLUAU';
+      let width = 0;
+      let height = 0;
+      let cols = 0;
+      let drops = [];
+
+      const setSize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.max(24, Math.floor(width / 14));
+        drops = Array.from({ length: cols }, () => Math.random() * -120);
+      };
+
+      const draw = () => {
+        ctx.fillStyle = 'rgba(2, 6, 12, 0.18)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.font = 'bold 13px Audiowide, monospace';
+        for (let i = 0; i < cols; i++) {
+          const text = chars[(Math.random() * chars.length) | 0];
+          const x = i * 14;
+          const y = drops[i] * 14;
+          ctx.fillStyle = `rgba(${90 + (Math.random()*110|0)}, 255, ${160 + (Math.random()*90|0)}, 0.92)`;
+          ctx.fillText(text, x, y);
+          if (y > height && Math.random() > 0.965) drops[i] = (Math.random() * -30) | 0;
+          drops[i] += 0.95 + Math.random() * 1.35;
+        }
+        requestAnimationFrame(draw);
+      };
+
+      setSize();
+      window.addEventListener('resize', setSize, { passive: true });
+      draw();
+    })();
+  </script>
 </body>
 </html>
