@@ -8,6 +8,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large" />
+  <meta name="subject" content="Fadhil Akbar Cariearsa official portfolio" />
   <meta name="theme-color" content="#060913" />
   <meta name="keywords" content="Fadhil, Fadhil Akbar, Cariearsa, Fadhil Akbar Cariearsa, Fadhil portfolio" />
   <meta name="author" content="Fadhil Akbar" />
@@ -27,6 +28,8 @@
   <meta name="copyright" content="Fadhil Akbar" />
   <link rel="canonical" href="https://fadhil.qzz.io/" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="author" href="/" />
+  <link rel="me" href="https://MindMapper.qzz.io" />
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://fadhil.qzz.io/sitemap.xml" />
   <link rel="alternate" hreflang="en" href="https://fadhil.qzz.io/" />
   <link rel="alternate" hreflang="x-default" href="https://fadhil.qzz.io/" />
@@ -76,7 +79,8 @@
     body {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: "Orbitron", "Segoe UI", system-ui, sans-serif;
       background:
         radial-gradient(circle at 10% 10%, rgba(53, 130, 255, 0.2), transparent 48%),
@@ -98,16 +102,16 @@
     }
 
     .viewport {
-      height: 100dvh;
+      min-height: 100dvh;
       padding: clamp(8px, 1.5vw, 14px);
       display: grid;
       place-items: center;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .shell {
-      width: min(1080px, 100%);
-      height: min(100%, 760px);
+      width: min(1120px, 100%);
+      min-height: 620px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: linear-gradient(165deg, rgba(9, 17, 34, 0.88), rgba(5, 12, 23, 0.95));
@@ -116,7 +120,7 @@
       display: grid;
       grid-template-columns: 1.08fr 1fr;
       gap: clamp(8px, 1.2vw, 12px);
-      overflow: hidden;
+      overflow: visible;
     }
 
     .panel {
@@ -431,22 +435,24 @@
 
     @media (max-width: 900px) {
       .shell {
-        max-width: 560px;
+        max-width: 720px;
+        min-height: auto;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
       }
 
       .lang-grid,
-      .tool-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
       .tool-chip,
       .lang-chip { min-height: 36px; }
     }
 
     @media (max-width: 620px) {
-      .viewport { padding: 6px; }
+      .viewport { padding: 8px 6px 14px; }
 
       .shell {
+        min-height: auto;
         border-radius: 14px;
         padding: 8px;
         gap: 7px;
@@ -512,6 +518,18 @@
           "description": "Official portfolio profile for Fadhil Akbar Cariearsa."
         },
         {
+          "@type": "Organization",
+          "@id": "https://fadhil.qzz.io/#organization",
+          "name": "Fadhil Akbar Cariearsa Portfolio",
+          "url": "https://fadhil.qzz.io/",
+          "founder": { "@id": "https://fadhil.qzz.io/#person" },
+          "sameAs": [
+            "https://MindMapper.qzz.io",
+            "https://WebWorlds.vercel.app",
+            "https://TemplateDatabases.vercel.app"
+          ]
+        },
+        {
           "@type": "WebSite",
           "@id": "https://fadhil.qzz.io/#website",
           "url": "https://fadhil.qzz.io/",
@@ -526,7 +544,8 @@
           "name": "Fadhil Akbar Cariearsa | Official Portfolio",
           "isPartOf": { "@id": "https://fadhil.qzz.io/#website" },
           "mainEntity": { "@id": "https://fadhil.qzz.io/#person" },
-          "about": ["Fadhil", "Fadhil Akbar", "Fadhil Akbar Cariearsa", "Cariearsa"]
+          "about": ["Fadhil", "Fadhil Akbar", "Fadhil Akbar Cariearsa", "Cariearsa"],
+          "dateModified": "2026-02-19"
         },
         {
           "@type": "ItemList",
