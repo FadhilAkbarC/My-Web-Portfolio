@@ -471,7 +471,7 @@
     .project-grid,
     .image-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: 8px;
     }
 
@@ -488,10 +488,11 @@
     .project-image,
     .asset-image {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
+      max-height: clamp(190px, 36vh, 320px);
+      object-fit: contain;
       border-radius: 8px;
       border: 1px solid rgba(86, 222, 255, 0.26);
+      background: rgba(2, 8, 20, 0.8);
     }
 
     .project-link {
@@ -711,9 +712,7 @@
         font-size: clamp(0.5rem, 2.05vw, 0.61rem);
       }
 
-      .portfolio-switcher,
-      .project-grid,
-      .image-grid {
+      .portfolio-switcher {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -907,10 +906,14 @@
         <section class="portfolio-tab" id="tab-image" role="tabpanel" aria-labelledby="btn-image">
           <p class="learning-line">Portfolio Images &amp; Assets</p>
           <div class="image-grid">
-            <article class="image-card"><img class="asset-image" src="public/images/Mindmapper.jpg" alt="MindMapper asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
-            <article class="image-card"><img class="asset-image" src="public/images/Webworlds.jpg" alt="WebWorlds asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
-            <article class="image-card"><img class="asset-image" src="public/images/Mindmapper.jpg" alt="MindMapper alternate asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
-            <article class="image-card"><img class="asset-image" src="public/images/Webworlds.jpg" alt="WebWorlds alternate asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
+            <article class="image-card">
+              <img class="asset-image" src="public/images/Mindmapper.jpg" alt="MindMapper asset preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://MindMapper.qzz.io" target="_blank" rel="noopener noreferrer">MindMapper Asset</a>
+            </article>
+            <article class="image-card">
+              <img class="asset-image" src="public/images/Webworlds.jpg" alt="WebWorlds asset preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://webworlds.vercel.app" target="_blank" rel="noopener noreferrer">WebWorlds Asset</a>
+            </article>
           </div>
         </section>
 
@@ -1085,11 +1088,6 @@
 
         if (target === '#about') {
           scroller.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
-          return;
-        }
-
-        if (target === '#portfolio') {
-          scroller.scrollTo({ top: scroller.scrollHeight, behavior: prefersReduced ? 'auto' : 'smooth' });
           return;
         }
 
