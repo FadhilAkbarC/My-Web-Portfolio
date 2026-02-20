@@ -331,6 +331,44 @@
       justify-content: flex-start;
     }
 
+    .collapse-panel {
+      border: 1px solid rgba(86, 222, 255, 0.26);
+      border-radius: 10px;
+      background: rgba(7, 16, 34, 0.6);
+      overflow: hidden;
+    }
+
+    .collapse-toggle {
+      list-style: none;
+      cursor: pointer;
+      padding: 9px 10px;
+      font-size: clamp(0.54rem, 0.94vw, 0.68rem);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: "Share Tech Mono", "Rajdhani", sans-serif;
+      color: #ddf6ff;
+      border-bottom: 1px solid rgba(86, 222, 255, 0.14);
+      background: rgba(7, 24, 45, 0.72);
+    }
+
+    .collapse-toggle::-webkit-details-marker {
+      display: none;
+    }
+
+    .collapse-toggle::after {
+      content: "▾";
+      float: right;
+      transition: transform 0.18s ease;
+    }
+
+    .collapse-panel[open] .collapse-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .collapse-content {
+      padding: 8px;
+    }
+
     .seo-block {
       margin-top: 2px;
       padding: 8px;
@@ -389,6 +427,92 @@
       display: grid;
       gap: 7px;
       width: 100%;
+    }
+
+    .portfolio-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .switcher-btn {
+      border: 1px solid rgba(86, 222, 255, 0.33);
+      border-radius: 9px;
+      background: rgba(8, 20, 38, 0.75);
+      color: #d9f4ff;
+      padding: 8px 10px;
+      font-size: clamp(0.54rem, 0.95vw, 0.68rem);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: "Share Tech Mono", "Rajdhani", sans-serif;
+      cursor: pointer;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .switcher-btn:hover,
+    .switcher-btn:focus-visible,
+    .switcher-btn.is-active {
+      border-color: rgba(86, 222, 255, 0.85);
+      box-shadow: 0 0 14px rgba(86, 222, 255, 0.25);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .portfolio-tab {
+      display: none;
+      gap: 8px;
+    }
+
+    .portfolio-tab.is-active {
+      display: grid;
+    }
+
+    .project-grid,
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .project-card,
+    .image-card {
+      border: 1px solid rgba(86, 222, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(7, 18, 35, 0.72);
+      padding: 8px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .project-image,
+    .asset-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid rgba(86, 222, 255, 0.26);
+    }
+
+    .project-link {
+      display: inline-block;
+      font-size: clamp(0.52rem, 0.9vw, 0.66rem);
+      color: #c5f2ff;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .project-link:hover,
+    .project-link:focus-visible {
+      text-decoration: underline;
+      color: #ffffff;
+      outline: none;
+    }
+
+    .doc-item {
+      border: 1px solid rgba(184, 111, 255, 0.32);
+      border-radius: 9px;
+      background: rgba(30, 17, 52, 0.45);
+      padding: 8px;
     }
 
     .link-item {
@@ -584,6 +708,16 @@
         padding: 7px 8px;
         font-size: clamp(0.5rem, 2.05vw, 0.61rem);
       }
+
+      .portfolio-switcher,
+      .project-grid,
+      .image-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .switcher-btn:last-child {
+        grid-column: 1 / -1;
+      }
     }
   </style>
   <script type="application/ld+json">
@@ -703,41 +837,95 @@
           <p class="learning-line">I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python</p>
         </header>
 
-        <section class="lang-grid" aria-label="Programming languages I am learning">
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5z"/><path d="M9 9h2m-2 4h6m-6 4h4"/></svg>Typescript</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h3v8M15 10c0-1-1-2-2-2s-2 1-2 2c0 3 4 2 4 5 0 1-1 2-2 2s-2-1-2-2"/></svg>Javascript</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>Html</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h5M8 16h7"/></svg>Css</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M6 8h12M6 16h12"/></svg>Luau</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/><path d="M9 9h6v6H9z"/></svg>Lua</div>
-          <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l3 5v11H4V9z"/><path d="M9 13h6M9 17h3"/></svg>Python</div>
-        </section>
+        <details class="collapse-panel">
+          <summary class="collapse-toggle">Programming Languages I Am Learning</summary>
+          <section class="lang-grid collapse-content" aria-label="Programming languages I am learning">
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5z"/><path d="M9 9h2m-2 4h6m-6 4h4"/></svg>Typescript</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h3v8M15 10c0-1-1-2-2-2s-2 1-2 2c0 3 4 2 4 5 0 1-1 2-2 2s-2-1-2-2"/></svg>Javascript</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>Html</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h5M8 16h7"/></svg>Css</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M6 8h12M6 16h12"/></svg>Luau</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/><path d="M9 9h6v6H9z"/></svg>Lua</div>
+            <div class="lang-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10l3 5v11H4V9z"/><path d="M9 13h6M9 17h3"/></svg>Python</div>
+          </section>
+        </details>
 
-        <p class="learning-line">Tools and Frameworks I Use</p>
-        <section class="tool-grid" aria-label="Tools and frameworks I use">
-          <div class="tool-chip"><span class="tool-category">Game Dev</span><span class="tool-name">Roblox Studio</span></div>
-          <div class="tool-chip"><span class="tool-category">Sync Tool</span><span class="tool-name">Rojo</span></div>
-          <div class="tool-chip"><span class="tool-category">Editor</span><span class="tool-name">VS Code</span></div>
-          <div class="tool-chip"><span class="tool-category">Framework</span><span class="tool-name">Next.js</span></div>
-          <div class="tool-chip"><span class="tool-category">Hosting</span><span class="tool-name">Railway</span></div>
-          <div class="tool-chip"><span class="tool-category">Hosting</span><span class="tool-name">Vercel</span></div>
-          <div class="tool-chip"><span class="tool-category">Database</span><span class="tool-name">PostgreSQL</span></div>
-          <div class="tool-chip"><span class="tool-category">Database</span><span class="tool-name">MongoDB</span></div>
-          <div class="tool-chip"><span class="tool-category">Game Engine</span><span class="tool-name">Godot Engine</span></div>
-          <div class="tool-chip"><span class="tool-category">Platform</span><span class="tool-name">GitHub</span></div>
-          <div class="tool-chip"><span class="tool-category">Versioning</span><span class="tool-name">Git</span></div>
-          <div class="tool-chip"><span class="tool-category">AI Tool</span><span class="tool-name">Codex</span></div>
-          <div class="tool-chip"><span class="tool-category">Builder</span><span class="tool-name">F3X</span></div>
-          <div class="tool-chip"><span class="tool-category">Toolkit</span><span class="tool-name">Lemonade</span></div>
-        </section>
+        <details class="collapse-panel">
+          <summary class="collapse-toggle">Tools and Frameworks I Use</summary>
+          <section class="tool-grid collapse-content" aria-label="Tools and frameworks I use">
+            <div class="tool-chip"><span class="tool-category">Game Dev</span><span class="tool-name">Roblox Studio</span></div>
+            <div class="tool-chip"><span class="tool-category">Sync Tool</span><span class="tool-name">Rojo</span></div>
+            <div class="tool-chip"><span class="tool-category">Editor</span><span class="tool-name">VS Code</span></div>
+            <div class="tool-chip"><span class="tool-category">Framework</span><span class="tool-name">Next.js</span></div>
+            <div class="tool-chip"><span class="tool-category">Hosting</span><span class="tool-name">Railway</span></div>
+            <div class="tool-chip"><span class="tool-category">Hosting</span><span class="tool-name">Vercel</span></div>
+            <div class="tool-chip"><span class="tool-category">Database</span><span class="tool-name">PostgreSQL</span></div>
+            <div class="tool-chip"><span class="tool-category">Database</span><span class="tool-name">MongoDB</span></div>
+            <div class="tool-chip"><span class="tool-category">Game Engine</span><span class="tool-name">Godot Engine</span></div>
+            <div class="tool-chip"><span class="tool-category">Platform</span><span class="tool-name">GitHub</span></div>
+            <div class="tool-chip"><span class="tool-category">Versioning</span><span class="tool-name">Git</span></div>
+            <div class="tool-chip"><span class="tool-category">AI Tool</span><span class="tool-name">Codex</span></div>
+            <div class="tool-chip"><span class="tool-category">Builder</span><span class="tool-name">F3X</span></div>
+            <div class="tool-chip"><span class="tool-category">Toolkit</span><span class="tool-name">Lemonade</span></div>
+          </section>
+        </details>
       </article>
 
       <article class="panel portfolio-panel" id="portfolio">
         <h2 class="section-title cyber-typed">My Learning Portfolio</h2>
-        <p class="learning-line">Links (Click / Tap)</p>
+        <div class="portfolio-switcher" role="tablist" aria-label="Portfolio section switcher">
+          <button class="switcher-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-projects" id="btn-projects" data-target="tab-projects">Projects</button>
+          <button class="switcher-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-image" id="btn-image" data-target="tab-image">Image</button>
+          <button class="switcher-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-docs" id="btn-docs" data-target="tab-docs">Documentation</button>
+        </div>
+
+        <section class="portfolio-tab is-active" id="tab-projects" role="tabpanel" aria-labelledby="btn-projects">
+          <p class="learning-line">Projects (default)</p>
+          <div class="project-grid">
+            <article class="project-card">
+              <img class="project-image" src="/public/images/Mindmapper.jpg" alt="MindMapper project preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://MindMapper.qzz.io" target="_blank" rel="noopener noreferrer">https://MindMapper.qzz.io</a>
+            </article>
+            <article class="project-card">
+              <img class="project-image" src="/public/images/Webworlds.jpg" alt="WebWorlds project preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://webworlds.vercell.app" target="_blank" rel="noopener noreferrer">https://webworlds.vercell.app</a>
+            </article>
+            <article class="project-card">
+              <img class="project-image" src="/public/images/Mindmapper.jpg" alt="TemplateDatabases project preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://TemplateDatabases.vercel.app" target="_blank" rel="noopener noreferrer">https://TemplateDatabases.vercel.app</a>
+            </article>
+            <article class="project-card">
+              <img class="project-image" src="/public/images/Webworlds.jpg" alt="Portfolio profile preview" loading="lazy" decoding="async" width="1200" height="675" />
+              <a class="project-link" href="https://fadhil.qzz.io/" target="_blank" rel="noopener noreferrer">https://fadhil.qzz.io/</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="portfolio-tab" id="tab-image" role="tabpanel" aria-labelledby="btn-image">
+          <p class="learning-line">Portfolio Images &amp; Assets</p>
+          <div class="image-grid">
+            <article class="image-card"><img class="asset-image" src="/public/images/Mindmapper.jpg" alt="MindMapper asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
+            <article class="image-card"><img class="asset-image" src="/public/images/Webworlds.jpg" alt="WebWorlds asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
+            <article class="image-card"><img class="asset-image" src="/public/images/Mindmapper.jpg" alt="MindMapper alternate asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
+            <article class="image-card"><img class="asset-image" src="/public/images/Webworlds.jpg" alt="WebWorlds alternate asset preview" loading="lazy" decoding="async" width="1200" height="675" /></article>
+          </div>
+        </section>
+
+        <section class="portfolio-tab" id="tab-docs" role="tabpanel" aria-labelledby="btn-docs">
+          <p class="learning-line">Documentation (Click / Tap)</p>
+          <div class="links">
+            <a class="link-item" href="https://MindMapper.qzz.io" target="_blank" rel="noopener noreferrer">MindMapper Documentation</a>
+            <a class="link-item" href="https://webworlds.vercell.app" target="_blank" rel="noopener noreferrer">WebWorlds Documentation</a>
+            <a class="link-item" href="https://TemplateDatabases.vercel.app" target="_blank" rel="noopener noreferrer">TemplateDatabases Documentation</a>
+          </div>
+          <div class="doc-item">
+            <p class="seo-copy">Semua kategori tetap berada pada URL utama, dan bisa dibuka lewat tombol Projects, Image, dan Documentation tanpa pindah halaman.</p>
+          </div>
+        </section>
+
         <div class="links">
           <a class="link-item" href="https://MindMapper.qzz.io" target="_blank" rel="noopener noreferrer">https://MindMapper.qzz.io</a>
-          <a class="link-item" href="https://WebWorlds.vercel.app" target="_blank" rel="noopener noreferrer">https://WebWorlds.vercel.app</a>
+          <a class="link-item" href="https://webworlds.vercell.app" target="_blank" rel="noopener noreferrer">https://webworlds.vercell.app</a>
           <a class="link-item" href="https://TemplateDatabases.vercel.app" target="_blank" rel="noopener noreferrer">https://TemplateDatabases.vercel.app</a>
         </div>
 
@@ -850,6 +1038,30 @@
       setSize();
       window.addEventListener('resize', setSize, { passive: true });
       draw();
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const tabButtons = document.querySelectorAll('.switcher-btn[data-target]');
+      const tabs = document.querySelectorAll('.portfolio-tab');
+      if (!tabButtons.length || !tabs.length) return;
+
+      const activateTab = (targetId) => {
+        tabs.forEach((tab) => {
+          tab.classList.toggle('is-active', tab.id === targetId);
+        });
+
+        tabButtons.forEach((button) => {
+          const isActive = button.dataset.target === targetId;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-selected', String(isActive));
+        });
+      };
+
+      tabButtons.forEach((button) => {
+        button.addEventListener('click', () => activateTab(button.dataset.target));
+      });
     })();
   </script>
 
