@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "outputDirectory": ".",
   "redirects": [
     {
       "source": "/(.*)",
@@ -12,19 +11,6 @@
       ],
       "destination": "https://fadhil.qzz.io/$1",
       "permanent": true
-    }
-  ],
-  "routes": [
-    {
-      "src": "/favicon.png",
-      "dest": "/favicon.ico"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
     }
   ]
 }
