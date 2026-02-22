@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "outputDirectory": ".",
   "redirects": [
     {
       "source": "/(.*)",
@@ -13,36 +14,6 @@
       "permanent": true
     }
   ],
-  "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "favicon.ico",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "favicon.svg",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "robots.txt",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "sitemap.xml",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "site.webmanifest",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
     {
       "src": "/favicon.png",
@@ -50,10 +21,6 @@
     },
     {
       "handle": "filesystem"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
