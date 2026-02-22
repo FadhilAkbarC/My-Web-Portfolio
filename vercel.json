@@ -12,5 +12,15 @@
       "destination": "https://fadhil.qzz.io/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/favicon.png",
+      "destination": "/favicon.ico"
+    }
   ]
 }
