@@ -38,6 +38,17 @@ You can also tweak colors, backgrounds, and neon/glassmorphism effects in the `s
 
 All features work out of the box—no server or build pipeline needed!
 
+## ⚠️ Troubleshooting GitHub → Vercel (Repo Rename/Transfer)
+
+Jika push ke GitHub tidak memicu deploy baru di Vercel, biasanya penyebabnya **bukan kode halaman**, tetapi integrasi Git pada project Vercel yang masih menunjuk repo lama.
+
+Checklist cepat di Vercel:
+1. Project terhubung ke repo: `futurisme/My-Web-Portfolio` (bukan owner lama).
+2. **Production Branch** = `main`.
+3. Root Directory = repository root (`.`).
+4. Setelah transfer/rename repo, lakukan reconnect Git Integration di dashboard Vercel.
+5. Trigger redeploy manual sekali dari tab Deployments untuk sinkronisasi webhook.
+
 ---
 
 Enjoy your visually stunning, interactive, and mobile-optimized web portfolio.
