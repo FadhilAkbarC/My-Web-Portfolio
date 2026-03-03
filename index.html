@@ -234,6 +234,23 @@
     .tool-category { font-size: 0.64rem; color: #8c7d72; text-transform: uppercase; }
     .tool-name { font-size: 0.78rem; font-weight: 700; color: #343130; }
 
+    .soft-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    .soft-chip {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 6px;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #35312f;
+      line-height: 1.2;
+    }
+
     .portfolio-switcher { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
     .switcher-btn { padding: 7px 8px; font-size: 0.74rem; cursor: pointer; }
     .switcher-btn.is-active { border-color: rgba(156, 123, 99, 0.75); background: #f7f2ed; }
@@ -282,6 +299,7 @@
       .portfolio-switcher { grid-template-columns: 1fr; }
       .lang-chip,
       .tool-chip,
+      .soft-chip,
       .switcher-btn,
       .project-link,
       .link-item { font-size: 0.69rem; }
@@ -433,6 +451,21 @@
             <div class="tool-chip"><span class="tool-category">AI Tool</span><span class="tool-name">Codex</span></div>
             <div class="tool-chip"><span class="tool-category">Builder</span><span class="tool-name">F3X</span></div>
             <div class="tool-chip"><span class="tool-category">Toolkit</span><span class="tool-name">Lemonade</span></div>
+          </section>
+        </details>
+
+        <details class="collapse-panel">
+          <summary class="collapse-toggle">My Soft Skills</summary>
+          <section class="soft-grid collapse-content" aria-label="My soft skills">
+            <div class="soft-chip">Teamwork</div>
+            <div class="soft-chip">Collaboration</div>
+            <div class="soft-chip">Communication</div>
+            <div class="soft-chip">Problem Solving</div>
+            <div class="soft-chip">Flexibility</div>
+            <div class="soft-chip">Multitasking</div>
+            <div class="soft-chip">Reliability</div>
+            <div class="soft-chip">Strategic Thinking</div>
+            <div class="soft-chip">Integrity</div>
           </section>
         </details>
       </article>
