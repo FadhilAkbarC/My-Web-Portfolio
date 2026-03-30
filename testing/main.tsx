@@ -179,4 +179,21 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('app')!).render(<App />);
+const mountNode = document.getElementById('app');
+
+if (!mountNode) {
+  throw new Error('Missing #app mount node for /testing page.');
+}
+
+try {
+  createRoot(mountNode).render(<App />);
+} catch (error) {
+  mountNode.innerHTML = `
+    <section style="max-width:760px;margin:40px auto;padding:20px;border-radius:16px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:system-ui,sans-serif;">
+      <h1 style="margin:0 0 12px;font-size:1.25rem;">Testing page gagal dimuat sempurna</h1>
+      <p style="margin:0 0 12px;line-height:1.6;">Terjadi error runtime saat me-render portfolio rework. Silakan refresh halaman atau coba lagi beberapa saat.</p>
+      <a href="/" style="display:inline-block;padding:10px 14px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;">Kembali ke halaman utama</a>
+    </section>
+  `;
+  console.error('[testing-page] render failed:', error);
+}
