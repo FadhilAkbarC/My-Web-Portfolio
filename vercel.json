@@ -10,12 +10,12 @@
   ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/testing", "destination": "/Testing/index.html" },
-    { "source": "/testing/", "destination": "/Testing/index.html" },
-    { "source": "/testing/(.*)", "destination": "/Testing/$1" },
-    { "source": "/Testing", "destination": "/Testing/index.html" },
-    { "source": "/Testing/", "destination": "/Testing/index.html" },
-    { "source": "/Testing/(.*)", "destination": "/Testing/$1" },
+    { "source": "/testing", "destination": "/testing/index.html" },
+    { "source": "/testing/", "destination": "/testing/index.html" },
+    { "source": "/testing/(.*)", "destination": "/testing/$1" },
+    { "source": "/Testing", "destination": "/testing/index.html" },
+    { "source": "/Testing/", "destination": "/testing/index.html" },
+    { "source": "/Testing/(.*)", "destination": "/testing/$1" },
     { "source": "/favicon.png", "destination": "/favicon.ico" }
   ],
   "headers": [
