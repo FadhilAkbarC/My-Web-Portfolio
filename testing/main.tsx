@@ -43,25 +43,25 @@ const projects = [
   {
     title: 'MindMapper',
     url: 'https://MindMapper.qzz.io',
-    image: '/public/images/Mindmapper.jpg',
+    image: '/images/Mindmapper.jpg',
     stack: 'Built: Vercel · Railway · PostgreSQL · DB',
   },
   {
     title: 'WebWorlds',
     url: 'https://webworlds.vercel.app',
-    image: '/public/images/WebWorlds.jpg',
+    image: '/images/WebWorlds.jpg',
     stack: 'Built: Vercel · Railway · PostgreSQL · DB',
   },
   {
     title: 'TemplateDatabases',
     url: 'https://templatedatabases.vercel.app/',
-    image: '/public/images/TemplateDatabase.jpg',
+    image: '/images/TemplateDatabase.jpg',
     stack: 'Built: Vercel · Railway · PostgreSQL · DB',
   },
   {
     title: 'Fadhil Profile',
     url: 'https://fadhil.qzz.io/',
-    image: '/public/images/WebWorlds.jpg',
+    image: '/images/WebWorlds.jpg',
     stack: 'Built: Vercel',
   },
 ];
@@ -133,11 +133,18 @@ function App() {
           <HeaderShell
             eyebrow="Hidden Release"
             title="Fadhil Akbar Cariearsa — Testing Portfolio"
-            subtitle="Visual rework 100% fadhilweblib (hanya rilis di /Testing)."
+            subtitle="Visual rework 100% fadhilweblib (akses manual via /testing)."
             meta={<StatusChip tone="success" label="Testing Only" />}
             syntax="surface(bg:surface(base), border:tone(brand, border), radius:24, shadow:shadow(floating)); spacing(p:lg);"
           />
         </Section>
+
+        <Grid minItemWidth="160" gap="sm" syntax="spacing(mb:md);">
+          <Metric label="Projects" value={String(projects.length)} tone="brand" />
+          <Metric label="Tools" value={String(tools.length)} tone="info" />
+          <Metric label="Soft Skills" value={String(softSkills.length)} tone="success" />
+          <Metric label="Languages" value={String(languages.length)} tone="neutral" />
+        </Grid>
 
         <Grid columns="minmax(0,1fr) minmax(0,1fr)" minItemWidth="320" gap="md">
           <Section
@@ -146,7 +153,7 @@ function App() {
             syntax="layout(h:100%);"
             slotSyntax={{ description: 'text(fs:15, fg:text(muted));' }}
           >
-            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /Testing." />
+            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /testing." />
             <Grid minItemWidth="120" gap="sm" syntax="spacing(mt:sm);">
               {languages.map((language) => (
                 <Chip key={language}>{language}</Chip>

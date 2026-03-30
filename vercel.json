@@ -19,8 +19,27 @@
       "destination": "/index.html"
     },
     {
+      "source": "/testing",
+      "destination": "/Testing/index.html"
+    },
+    {
+      "source": "/testing/(.*)",
+      "destination": "/Testing/$1"
+    },
+    {
       "source": "/favicon.png",
       "destination": "/favicon.ico"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/testing",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
     }
   ]
 }
