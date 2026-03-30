@@ -94,7 +94,7 @@ function App() {
   ] as const;
 
   return (
-    <ThemeScope theme="portfolio" syntax="layout(minH:100dvh); surface(bg:gradient(160deg, #fdfdfd, #edf1f6 42%, #dbdeea)); spacing(py:lg);">
+    <ThemeScope theme="portfolio" syntax="layout(minH:100dvh); surface(bg:gradient(155deg, #090f1f, #111a31 45%, #1e1530)); spacing(py:lg);">
       <Container size="xl" syntax="layout(maxW:1200); spacing(px:md);">
         <Breadcrumbs
           items={[{ label: 'Home', href: '/' }, { label: 'Testing', current: true }]}
