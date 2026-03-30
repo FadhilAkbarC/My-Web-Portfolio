@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /Testing/
+Disallow: /testing/
 
 Host: fadhil.qzz.io
 Sitemap: https://fadhil.qzz.io/sitemap.xml

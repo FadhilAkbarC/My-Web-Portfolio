@@ -10,12 +10,23 @@
   ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    { "source": "/testing", "destination": "/Testing/index.html" },
+    { "source": "/testing/", "destination": "/Testing/index.html" },
+    { "source": "/testing/(.*)", "destination": "/Testing/$1" },
     { "source": "/Testing", "destination": "/Testing/index.html" },
     { "source": "/Testing/", "destination": "/Testing/index.html" },
     { "source": "/Testing/(.*)", "destination": "/Testing/$1" },
     { "source": "/favicon.png", "destination": "/favicon.ico" }
   ],
   "headers": [
+    {
+      "source": "/testing",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
+    },
+    {
+      "source": "/testing/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
+    },
     {
       "source": "/Testing",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]

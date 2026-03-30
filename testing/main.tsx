@@ -4,12 +4,15 @@ import '../src/lib/fadhilweblib/styles/theme.css';
 import { Button, CollapsiblePanel, Tabs } from '../src/lib/fadhilweblib/client';
 import {
   ActionGroup,
+  Breadcrumbs,
   Container,
+  EmptyState,
   Grid,
   HeaderShell,
   KeyValueList,
   Metric,
   Notice,
+  ProgressBar,
   Section,
   StatusChip,
   Surface,
@@ -82,10 +85,22 @@ function App() {
       ))}
     </Grid>
   );
+  const skillProgress = [
+    ['TypeScript', 66],
+    ['JavaScript', 82],
+    ['HTML/CSS', 87],
+    ['Luau/Lua', 78],
+    ['Python', 62],
+  ] as const;
 
   return (
     <ThemeScope theme="portfolio" syntax="layout(minH:100dvh); surface(bg:gradient(160deg, #fdfdfd, #edf1f6 42%, #dbdeea)); spacing(py:lg);">
       <Container size="xl" syntax="layout(maxW:1200); spacing(px:md);">
+        <Breadcrumbs
+          items={[{ label: 'Home', href: '/' }, { label: 'Testing', current: true }]}
+          ariaLabel="Hidden testing breadcrumb"
+          syntax="spacing(mb:sm);"
+        />
         <Section
           surface={false}
           syntax="spacing(mb:md);"
@@ -94,7 +109,7 @@ function App() {
           <HeaderShell
             eyebrow="Hidden Release"
             title="Fadhil Akbar Cariearsa — Testing Portfolio"
-            subtitle="Visual rework 100% fadhilweblib (akses manual via /Testing)."
+            subtitle="Visual rework 100% fadhilweblib (akses manual via /testing)."
             meta={<StatusChip tone="success" label="Testing Only" />}
             syntax="surface(bg:surface(base), border:tone(brand, border), radius:24, shadow:shadow(floating)); spacing(p:lg);"
           />
@@ -109,8 +124,16 @@ function App() {
 
         <Grid columns="minmax(0,1fr) minmax(0,1fr)" minItemWidth="320" gap="md">
           <Section title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python." syntax="layout(h:100%);" slotSyntax={{ description: 'text(fs:15, fg:text(muted));' }}>
-            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /Testing." />
+            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /testing (alias /Testing)." />
             <Grid minItemWidth="120" gap="sm" syntax="spacing(mt:sm);">{languages.map((language) => <Chip key={language}>{language}</Chip>)}</Grid>
+            <Surface tone="neutral" syntax="spacing(mt:sm, p:sm); surface(border:tone(info, border), radius:16);">
+              <Metric label="Portfolio Rework" value="fadhilweblib 100%" tone="info" />
+              <Grid minItemWidth="160" gap="sm" syntax="spacing(mt:sm);">
+                {skillProgress.map(([label, value]) => (
+                  <ProgressBar key={label} label={label} value={value} max={100} tone="brand" />
+                ))}
+              </Grid>
+            </Surface>
 
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false} syntax="spacing(mt:md);" slotSyntax={{ content: 'spacing(pt:sm);' }}>
               <Grid minItemWidth="180" gap="sm">
@@ -135,6 +158,17 @@ function App() {
                 { value: 'projects', label: 'Projects', content: projectCards() },
                 { value: 'image', label: 'Image', content: projectCards('image-') },
                 { value: 'docs', label: 'Documentation', content: docs },
+                {
+                  value: 'notes',
+                  label: 'Notes',
+                  content: (
+                    <EmptyState
+                      title="Eksperimen desain tetap fleksibel"
+                      description="Konten portfolio utama dipertahankan, area ini disiapkan untuk eksperimen visual tambahan di fadhilweblib."
+                      action={<Button as="a" href="mailto:FadhilAkbarCariearsaIndonesia@gmail.com" tone="brand" size="sm">Submit Feedback</Button>}
+                    />
+                  ),
+                },
               ]}
               slotSyntax={{ list: 'spacing(mb:sm);', panel: 'layout(minH:420);' }}
             />
