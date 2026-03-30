@@ -1,0 +1,15 @@
+{
+  "name": "my-web-portfolio-testing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:testing": "esbuild testing/main.tsx --bundle --format=esm --target=es2020 --minify --outfile=Testing/testing.js"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.3"
+  }
+}
