@@ -76,6 +76,8 @@ defineSyntax('tone:brand; px:18; py:12; radius:16; shadow:shadow(panel);');
 
 Use for flow, arrangement, grid, sizing, overflow, scroll, and positioning.
 
+`size(...)`, `sizing(...)`, and `dimension(...)` are aliases to this same namespace when you want sizing-focused readability.
+
 Keys:
 
 | Key | Meaning |
@@ -95,7 +97,9 @@ Keys:
 | `templateAreas`, `area` | Grid area authoring |
 | `colSpan`, `rowSpan` | Span shorthand |
 | `aspect` | Aspect ratio |
-| `w`, `h`, `minW`, `maxW`, `minH`, `maxH` | Box sizing |
+| `w`, `h`, `minW`, `maxW`, `minH`, `maxH` | Physical box sizing |
+| `inlineSize`, `blockSize` | Logical sizing |
+| `minInlineSize`, `maxInlineSize`, `minBlockSize`, `maxBlockSize` | Logical min/max sizing |
 | `overflow`, `overflowX`, `overflowY` | Overflow |
 | `overscroll`, `overscrollX`, `overscrollY` | Overscroll behavior |
 | `scrollBehavior` | Scroll behavior |
@@ -230,6 +234,14 @@ defineSyntax('attrs(id:workspace-shell, draggable:true);');
 | `bw` | `borderWidth` |
 | `bs` | `borderStyle` |
 | `dir` | `direction` |
+| `width` | `w` |
+| `height` | `h` |
+| `inline` / `inlineWidth` | `inlineSize` |
+| `block` / `blockHeight` | `blockSize` |
+| `minInline` | `minInlineSize` |
+| `maxInline` | `maxInlineSize` |
+| `minBlock` | `minBlockSize` |
+| `maxBlock` | `maxBlockSize` |
 | `ox` | `overflowX` |
 | `oy` | `overflowY` |
 | `clamp` | `clampLines` |

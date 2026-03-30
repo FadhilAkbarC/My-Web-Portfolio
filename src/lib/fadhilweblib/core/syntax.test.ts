@@ -206,6 +206,20 @@ test('resolveSyntax supports grouped object syntax and css overrides', () => {
   assert.equal(resolved.attrs.draggable, true);
 });
 
+test('resolveSyntax supports extended sizing keys and size namespace aliases', () => {
+  const resolved = resolveSyntax(
+    'size(width:320, height:180, minInline:16rem, maxInline:72ch, block:60vh, minBlock:18rem, maxBlock:90vh);',
+  );
+
+  assert.equal(resolved.style.width, '320px');
+  assert.equal(resolved.style.height, '180px');
+  assert.equal(resolved.style.minInlineSize, '16rem');
+  assert.equal(resolved.style.maxInlineSize, '72ch');
+  assert.equal(resolved.style.blockSize, '60vh');
+  assert.equal(resolved.style.minBlockSize, '18rem');
+  assert.equal(resolved.style.maxBlockSize, '90vh');
+});
+
 test('resolveSyntax supports positioning, truncation, and visually-hidden behavior helpers', () => {
   const resolved = resolveSyntax(
     'layout(pin:full, sticky:24, overscroll:contain, scrollBehavior:smooth); text(truncate:true); logic(interactive:true, visuallyHidden:true); attrs(id:hero-banner);',

@@ -15,6 +15,26 @@
 - `@/lib/fadhilweblib/presets`
   Theme-neutral preset packs for `commercial`, `game`, `utility`, and `portfolio`.
 
+## Quick Size Control (New)
+
+To make sizing easier to read, you can now use a dedicated `size(...)` namespace as an alias of `layout(...)`.
+
+```tsx
+const cardSize = defineSyntax(`
+  size(width:320, height:220, minInline:18rem, maxInline:72ch, block:60vh);
+`);
+```
+
+Canonical sizing keys now include:
+
+- `w` / `width`
+- `h` / `height`
+- `minW`, `maxW`, `minH`, `maxH`
+- `inlineSize` (`inline`, `inlineWidth`)
+- `blockSize` (`block`, `blockHeight`)
+- `minInlineSize` (`minInline`), `maxInlineSize` (`maxInline`)
+- `minBlockSize` (`minBlock`), `maxBlockSize` (`maxBlock`)
+
 ## Core Principle
 
 Use semantic primitives first. Use syntax only when you need instance-level control without building a one-off component.

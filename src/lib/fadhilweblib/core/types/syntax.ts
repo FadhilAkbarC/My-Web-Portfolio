@@ -89,6 +89,12 @@ export interface FadhilWebFlatSyntaxObject {
   maxW?: string | number;
   minH?: string | number;
   maxH?: string | number;
+  inlineSize?: string | number;
+  blockSize?: string | number;
+  minInlineSize?: string | number;
+  maxInlineSize?: string | number;
+  minBlockSize?: string | number;
+  maxBlockSize?: string | number;
   fontSize?: string | number;
   fontFamily?: string;
   weight?: string | number;
@@ -242,6 +248,12 @@ export type FadhilWebLayoutSyntaxKey =
   | 'maxW'
   | 'minH'
   | 'maxH'
+  | 'inlineSize'
+  | 'blockSize'
+  | 'minInlineSize'
+  | 'maxInlineSize'
+  | 'minBlockSize'
+  | 'maxBlockSize'
   | 'overflow'
   | 'overflowX'
   | 'overflowY'

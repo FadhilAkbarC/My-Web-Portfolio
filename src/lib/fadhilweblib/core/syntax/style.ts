@@ -344,6 +344,12 @@ function resolveParsedSyntax(syntax: FadhilWebNormalizedSyntaxObject) {
   if (syntax.maxW !== undefined) style.maxWidth = resolveLengthValue(syntax.maxW);
   if (syntax.minH !== undefined) style.minHeight = resolveLengthValue(syntax.minH);
   if (syntax.maxH !== undefined) style.maxHeight = resolveLengthValue(syntax.maxH);
+  if (syntax.inlineSize !== undefined) style.inlineSize = resolveLengthValue(syntax.inlineSize);
+  if (syntax.blockSize !== undefined) style.blockSize = resolveLengthValue(syntax.blockSize);
+  if (syntax.minInlineSize !== undefined) style.minInlineSize = resolveLengthValue(syntax.minInlineSize);
+  if (syntax.maxInlineSize !== undefined) style.maxInlineSize = resolveLengthValue(syntax.maxInlineSize);
+  if (syntax.minBlockSize !== undefined) style.minBlockSize = resolveLengthValue(syntax.minBlockSize);
+  if (syntax.maxBlockSize !== undefined) style.maxBlockSize = resolveLengthValue(syntax.maxBlockSize);
   if (syntax.fontSize !== undefined) style.fontSize = resolveLengthValue(syntax.fontSize);
   if (syntax.fontFamily) style.fontFamily = syntax.fontFamily;
   if (syntax.weight !== undefined) style.fontWeight = parseNumber(syntax.weight) ?? String(syntax.weight);
