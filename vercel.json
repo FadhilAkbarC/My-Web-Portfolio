@@ -3,24 +3,21 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.fadhil.qzz.io"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.fadhil.qzz.io" }],
       "destination": "https://fadhil.qzz.io/$1",
       "permanent": true
     }
   ],
   "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/testing", "destination": "/Testing/index.html" },
+    { "source": "/testing/(.*)", "destination": "/Testing/$1" },
+    { "source": "/favicon.png", "destination": "/favicon.ico" }
+  ],
+  "headers": [
     {
-      "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/favicon.png",
-      "destination": "/favicon.ico"
+      "source": "/testing",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
     }
   ]
 }
