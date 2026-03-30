@@ -94,7 +94,7 @@ function App() {
           <HeaderShell
             eyebrow="Hidden Release"
             title="Fadhil Akbar Cariearsa — Testing Portfolio"
-            subtitle="Visual rework 100% fadhilweblib (akses manual via /testing)."
+            subtitle="Visual rework 100% fadhilweblib (akses manual via /Testing)."
             meta={<StatusChip tone="success" label="Testing Only" />}
             syntax="surface(bg:surface(base), border:tone(brand, border), radius:24, shadow:shadow(floating)); spacing(p:lg);"
           />
@@ -109,7 +109,7 @@ function App() {
 
         <Grid columns="minmax(0,1fr) minmax(0,1fr)" minItemWidth="320" gap="md">
           <Section title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python." syntax="layout(h:100%);" slotSyntax={{ description: 'text(fs:15, fg:text(muted));' }}>
-            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /testing." />
+            <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /Testing." />
             <Grid minItemWidth="120" gap="sm" syntax="spacing(mt:sm);">{languages.map((language) => <Chip key={language}>{language}</Chip>)}</Grid>
 
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false} syntax="spacing(mt:md);" slotSyntax={{ content: 'spacing(pt:sm);' }}>
