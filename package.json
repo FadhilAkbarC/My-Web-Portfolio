@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:testing": "esbuild testing/main.tsx --bundle --format=esm --target=es2020 --minify --outfile=testing/testing.js && mkdir -p public/testing Testing && cp testing/index.html public/testing/index.html && cp testing/index.html Testing/index.html && cp testing/testing.js public/testing/testing.js && cp testing/testing.js Testing/testing.js && cp testing/testing.css public/testing/testing.css && cp testing/testing.css Testing/testing.css"
+    "build:testing": "esbuild testing/main.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=testing/testing.js && mkdir -p public/testing Testing && cp testing/index.html public/testing/index.html && cp testing/index.html Testing/index.html && cp testing/testing.js public/testing/testing.js && cp testing/testing.js Testing/testing.js && cp testing/testing.css public/testing/testing.css && cp testing/testing.css Testing/testing.css"
   },
   "dependencies": {
     "react": "^19.1.0",
