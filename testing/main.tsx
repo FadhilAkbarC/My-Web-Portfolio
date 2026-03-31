@@ -196,7 +196,8 @@ function App() {
         <Grid columns="0.95fr 1.05fr" minItemWidth="320" gap="md">
           <Section
             id="about-testing"
-            title="About"
+            eyebrow="Fadhil Akbar Cariearsa"
+            title="About me"
             description={(
               <span style={{ display: 'block', fontSize: '0.8rem', lineHeight: 1.45 }}>
                 <span style={{ color: 'var(--fwlb-text-accent)', fontWeight: 900 }}>&ldquo;</span>
@@ -205,9 +206,25 @@ function App() {
               </span>
             )}
           >
-            <Grid minItemWidth="130" gap="sm">
+            <Grid columns="repeat(2, minmax(0, 1fr))" gap="sm">
               {languages.map((language) => (
-                <Surface key={language} tone="neutral" density="compact">{language}</Surface>
+                <Surface
+                  key={language}
+                  tone="neutral"
+                  density="compact"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    minHeight: '1.45rem',
+                    padding: '0.16rem 0.34rem',
+                    fontSize: '0.68rem',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {language}
+                </Surface>
               ))}
             </Grid>
 
