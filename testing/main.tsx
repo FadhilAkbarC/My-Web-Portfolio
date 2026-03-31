@@ -98,17 +98,17 @@ const contrastChecks = [
 ];
 
 const aboutQuote = 'As a tech enthusiast and dedicated hobbyist developer, I am passionate about mastering Luau, TypeScript, and Python. While I hold a solid foundation in web fundamentals and JavaScript, I find genuine joy in constantly honing my craft. I thrive on refining my code and expanding my technical toolkit to build cleaner, more efficient solutions every day.';
-const uniformGridColumns = 'repeat(auto-fit, minmax(130px, 1fr))';
+const uniformMinItemWidth = '128';
 const uniformTileStyle: React.CSSProperties = {
-  display: 'grid',
-  alignContent: 'center',
-  justifyItems: 'center',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   textAlign: 'center',
   width: '100%',
-  minHeight: '2.8rem',
-  padding: '0.24rem 0.4rem',
-  fontSize: '0.62rem',
-  lineHeight: 1.15,
+  minHeight: '2.15rem',
+  padding: '0.16rem 0.3rem',
+  fontSize: '0.58rem',
+  lineHeight: 1.1,
   maxWidth: '100%',
   overflow: 'hidden',
   wordBreak: 'break-word',
@@ -308,7 +308,7 @@ function App() {
               </span>
             )}
           >
-            <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
+            <Grid minItemWidth={uniformMinItemWidth} gap="sm">
               {languages.map((language) => (
                 <Surface
                   key={language}
@@ -322,14 +322,14 @@ function App() {
             </Grid>
 
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
+              <Grid minItemWidth={uniformMinItemWidth} gap="sm">
                 {tools.map(([category, name]) => (
                   <Surface key={name} tone="utility" density="compact" style={uniformTileStyle}>
                     <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0, width: '100%' }}>
-                      <div style={{ fontSize: '0.52rem', lineHeight: 1.1, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
+                      <div style={{ fontSize: '0.48rem', lineHeight: 1.05, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
                         {category}
                       </div>
-                      <div style={{ fontSize: '0.6rem', lineHeight: 1.1, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
+                      <div style={{ fontSize: '0.56rem', lineHeight: 1.05, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
                         {name}
                       </div>
                     </div>
@@ -339,7 +339,7 @@ function App() {
             </CollapsiblePanel>
 
             <CollapsiblePanel title="My Soft Skills" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
+              <Grid minItemWidth={uniformMinItemWidth} gap="sm">
                 {softSkills.map((skill) => (
                   <Surface
                     key={skill}
