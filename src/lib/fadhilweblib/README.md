@@ -238,3 +238,20 @@ const heroRecipe = defineRecipe({
 ## Full Reference
 
 See [SYNTAX.md](./SYNTAX.md) for the complete grouped namespace reference, flat key catalogue, escape hatch rules, and authoring guidance.
+
+## Performance Support Modules (Ultra-Light)
+
+`fadhilweblib` now includes five tree-shakable browser modules under `core/performance`:
+
+- `detectSmartMediaProfile`, `resolveSmartMediaSource`, `applyHeroPriorityHint`
+  Detect AVIF/WebP + connection tier (`navigator.connection`), switch media quality, and set Hero `fetchpriority`.
+- `installGhostPlaceholder`
+  Lazy-load images with a 10px blurred inline SVG placeholder and fade in only after decode.
+- `enableSpeculativeNavigation`
+  Uses Speculation Rules API to prerender project-detail pages after 150ms hover dwell.
+- `createAdaptiveHydrationEngine`
+  Defers loading interactive modules until targets become at least 20% visible.
+- `applyZeroJankMotion`, `createMotionStyle`
+  GPU-safe motion helpers that only mutate `transform` and `opacity`.
+
+All functions are dependency-free ESM exports and can be imported independently.

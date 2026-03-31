@@ -22,3 +22,5 @@ export { useRovingFocus } from './core/use-roving-focus';
 export { useSelectionState } from './core/use-selection-state';
 export { useStepper } from './core/use-stepper';
 export { useTabs } from './core/use-tabs';
+
+export * from './core/performance';
