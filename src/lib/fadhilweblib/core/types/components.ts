@@ -10,6 +10,8 @@ export interface ThemeScopeRecipeLogic {
 export interface ThemeScopeProps extends React.HTMLAttributes<HTMLElement> {
   as?: LayoutElement;
   theme?: ThemeName;
+  debugBoundary?: boolean;
+  debugTitle?: React.ReactNode;
   children?: React.ReactNode;
   syntax?: FadhilWebSyntax;
   recipe?: FadhilWebRecipe<never, ThemeScopeRecipeLogic>;

@@ -70,35 +70,6 @@ const projectCards = (keyPrefix = '') => (
   </Grid>
 );
 
-class AppErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: unknown) {
-    console.error('[testing-page] AppErrorBoundary caught render error:', error);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <section style={{ maxWidth: '760px', margin: '40px auto', padding: '20px', borderRadius: '16px', border: '1px solid #334155', background: '#0f172a', color: '#e2e8f0', fontFamily: 'system-ui,sans-serif' }}>
-          <h1 style={{ margin: '0 0 12px', fontSize: '1.25rem' }}>Testing UI gagal dirender</h1>
-          <p style={{ margin: '0 0 12px', lineHeight: 1.6 }}>Terjadi error render. Coba refresh. Jika masih gagal, build /testing akan dicek ulang.</p>
-          <a href="/" style={{ display: 'inline-block', padding: '10px 14px', borderRadius: '10px', background: '#2563eb', color: '#fff', textDecoration: 'none', fontWeight: 600 }}>Kembali ke halaman utama</a>
-        </section>
-      );
-    }
-
-    return this.props.children;
-  }
-}
-
 function App() {
   const docs = (
     <Grid minItemWidth="220" gap="sm">
@@ -119,7 +90,7 @@ function App() {
   ] as const;
 
   return (
-    <ThemeScope theme="portfolio">
+    <ThemeScope theme="portfolio" debugTitle="Testing UI gagal dirender">
       <Container size="xl">
         <Breadcrumbs
           items={[{ label: 'Home', href: '/' }, { label: 'Testing', current: true }]}
@@ -207,11 +178,7 @@ if (!mountNode) {
 }
 
 try {
-  createRoot(mountNode).render(
-    <AppErrorBoundary>
-      <App />
-    </AppErrorBoundary>,
-  );
+  createRoot(mountNode).render(<App />);
 } catch (error) {
   mountNode.innerHTML = `
     <section style="max-width:760px;margin:40px auto;padding:20px;border-radius:16px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:system-ui,sans-serif;">
