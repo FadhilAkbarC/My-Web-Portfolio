@@ -125,6 +125,7 @@ function App() {
       debugTitle="Testing UI gagal dirender"
       style={{
         minHeight: '100vh',
+        overflowX: 'clip',
         background: futuristicPalette.appBackground,
         color: futuristicPalette.textStrong,
         '--fwlb-surface-base': 'linear-gradient(180deg, rgba(6, 10, 28, 0.97), rgba(2, 6, 23, 0.97))',
@@ -215,6 +216,9 @@ function App() {
                     padding: '0.16rem 0.34rem',
                     fontSize: '0.68rem',
                     lineHeight: 1.1,
+                    maxWidth: '100%',
+                    overflow: 'hidden',
+                    wordBreak: 'break-word',
                   }}
                 >
                   {language}
@@ -225,8 +229,15 @@ function App() {
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false}>
               <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
                 {tools.map(([category, name]) => (
-                  <Surface key={name} tone="utility" density="compact" style={{ padding: '0.35rem' }}>
-                    <KeyValueList items={[{ key: 'Category', value: category }, { key: 'Tool', value: name }]} />
+                  <Surface key={name} tone="utility" density="compact" style={{ padding: '0.28rem', minHeight: '1.95rem', maxWidth: '100%', overflow: 'hidden' }}>
+                    <KeyValueList
+                      items={[{ label: 'Category', value: category }, { label: 'Tool', value: name }]}
+                      slotSyntax={{
+                        item: { style: { padding: '0.1rem 0' } },
+                        label: { style: { fontSize: '0.58rem', lineHeight: 1.2, letterSpacing: '0.02em', overflowWrap: 'anywhere' } },
+                        value: { style: { fontSize: '0.62rem', lineHeight: 1.2, overflowWrap: 'anywhere', textAlign: 'left' } },
+                      }}
+                    />
                   </Surface>
                 ))}
               </Grid>
@@ -239,7 +250,7 @@ function App() {
                     key={skill}
                     tone="neutral"
                     density="compact"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '1.45rem', padding: '0.16rem 0.34rem', fontSize: '0.68rem', lineHeight: 1.1 }}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '1.45rem', padding: '0.16rem 0.28rem', fontSize: '0.62rem', lineHeight: 1.1, maxWidth: '100%', overflow: 'hidden', wordBreak: 'break-word' }}
                   >
                     {skill}
                   </Surface>
