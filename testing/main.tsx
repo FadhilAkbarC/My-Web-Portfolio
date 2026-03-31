@@ -41,6 +41,59 @@ const projects = [
   ['Fadhil Profile', 'https://fadhil.qzz.io/', '/images/WebWorlds.jpg', 'Built: Vercel'],
 ] as const;
 
+const futuristicPalette = {
+  appBackground:
+    'radial-gradient(circle at 18% 10%, rgba(34,211,238,0.2), transparent 35%), radial-gradient(circle at 82% 0%, rgba(99,102,241,0.25), transparent 42%), linear-gradient(160deg, #020617 0%, #05081a 55%, #0a1028 100%)',
+  textStrong: '#f8fbff',
+  textSoft: '#ecfeff',
+  textMuted: '#c9edff',
+  toneNeutralBorder: 'rgba(186, 230, 253, 0.82)',
+  toneBrandBorder: 'rgba(224, 242, 254, 0.98)',
+  toneInfoBorder: 'rgba(224, 242, 254, 0.96)',
+} as const;
+
+function hexToRgb(hex: string) {
+  const normalized = hex.replace('#', '');
+  const value = normalized.length === 3
+    ? normalized.split('').map((char) => `${char}${char}`).join('')
+    : normalized;
+  const int = Number.parseInt(value, 16);
+  return {
+    r: (int >> 16) & 255,
+    g: (int >> 8) & 255,
+    b: int & 255,
+  };
+}
+
+function relativeLuminance(hex: string) {
+  const { r, g, b } = hexToRgb(hex);
+  const normalize = (channel: number) => {
+    const v = channel / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  return (0.2126 * normalize(r)) + (0.7152 * normalize(g)) + (0.0722 * normalize(b));
+}
+
+function contrastRatio(foreground: string, background: string) {
+  const l1 = relativeLuminance(foreground);
+  const l2 = relativeLuminance(background);
+  const brightest = Math.max(l1, l2);
+  const darkest = Math.min(l1, l2);
+  return (brightest + 0.05) / (darkest + 0.05);
+}
+
+const contrastChecks = [
+  ['textStrong vs baseDark', contrastRatio(futuristicPalette.textStrong, '#020617')],
+  ['textSoft vs panelDark', contrastRatio(futuristicPalette.textSoft, '#05081a')],
+  ['textMuted vs panelDark', contrastRatio(futuristicPalette.textMuted, '#0a1028')],
+];
+
+for (const [label, ratio] of contrastChecks) {
+  if (ratio < 7) {
+    throw new Error(`Contrast check failed for ${label}: ${ratio.toFixed(2)} (minimum 7.00).`);
+  }
+}
+
 function ProjectCard({ title, url, image, stack }: { title: string; url: string; image: string; stack: string }) {
   return (
     <Surface tone="neutral" style={{ display: 'grid', gap: '0.6rem' }}>
@@ -72,27 +125,26 @@ function App() {
       debugTitle="Testing UI gagal dirender"
       style={{
         minHeight: '100vh',
-        background:
-          'radial-gradient(circle at 18% 10%, rgba(34,211,238,0.2), transparent 35%), radial-gradient(circle at 82% 0%, rgba(99,102,241,0.25), transparent 42%), linear-gradient(160deg, #020617 0%, #05081a 55%, #0a1028 100%)',
-        color: '#f8fbff',
+        background: futuristicPalette.appBackground,
+        color: futuristicPalette.textStrong,
         '--fwlb-surface-base': 'linear-gradient(180deg, rgba(6, 10, 28, 0.97), rgba(2, 6, 23, 0.97))',
         '--fwlb-surface-elevated': 'linear-gradient(180deg, rgba(10, 16, 38, 0.98), rgba(4, 8, 24, 0.98))',
         '--fwlb-surface-muted': 'rgba(10, 20, 48, 0.78)',
         '--fwlb-border-soft': 'rgba(159, 247, 255, 0.55)',
         '--fwlb-border-strong': 'rgba(186, 230, 253, 0.85)',
-        '--fwlb-text-strong': '#f8fbff',
-        '--fwlb-text-soft': '#ecfeff',
-        '--fwlb-text-muted': '#c9edff',
+        '--fwlb-text-strong': futuristicPalette.textStrong,
+        '--fwlb-text-soft': futuristicPalette.textSoft,
+        '--fwlb-text-muted': futuristicPalette.textMuted,
         '--fwlb-text-accent': '#67e8f9',
         '--fwlb-tone-neutral-bg': 'linear-gradient(180deg, rgba(8, 15, 36, 0.98), rgba(4, 8, 26, 0.98))',
-        '--fwlb-tone-neutral-fg': '#f8fbff',
-        '--fwlb-tone-neutral-border': 'rgba(186, 230, 253, 0.82)',
+        '--fwlb-tone-neutral-fg': futuristicPalette.textStrong,
+        '--fwlb-tone-neutral-border': futuristicPalette.toneNeutralBorder,
         '--fwlb-tone-brand-bg': 'linear-gradient(135deg, rgba(30, 64, 175, 0.98), rgba(34, 211, 238, 0.95))',
-        '--fwlb-tone-brand-fg': '#f8fbff',
-        '--fwlb-tone-brand-border': 'rgba(224, 242, 254, 0.98)',
+        '--fwlb-tone-brand-fg': futuristicPalette.textStrong,
+        '--fwlb-tone-brand-border': futuristicPalette.toneBrandBorder,
         '--fwlb-tone-info-bg': 'linear-gradient(135deg, rgba(67, 56, 202, 0.96), rgba(56, 189, 248, 0.94))',
-        '--fwlb-tone-info-fg': '#f8fbff',
-        '--fwlb-tone-info-border': 'rgba(224, 242, 254, 0.96)',
+        '--fwlb-tone-info-fg': futuristicPalette.textStrong,
+        '--fwlb-tone-info-border': futuristicPalette.toneInfoBorder,
         '--fwlb-button-default-box-shadow': 'none',
         '--fwlb-button-hover-box-shadow': 'none',
         '--fwlb-button-active-box-shadow': 'none',
