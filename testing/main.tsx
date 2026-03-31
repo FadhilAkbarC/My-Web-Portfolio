@@ -191,13 +191,6 @@ function App() {
           />
         </Section>
 
-        <Grid minItemWidth="170" gap="sm" style={{ marginBottom: '0.8rem' }}>
-          <Metric label="Projects" value={`${projects.length}`} tone="brand" />
-          <Metric label="Tools" value={`${tools.length}`} tone="info" />
-          <Metric label="Soft Skills" value={`${softSkills.length}`} tone="success" />
-          <Metric label="Languages" value={`${languages.length}`} tone="neutral" />
-        </Grid>
-
         <Grid columns="0.95fr 1.05fr" minItemWidth="320" gap="md">
           <Section id="about-testing" title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python.">
             <Grid minItemWidth="130" gap="sm">
@@ -248,6 +241,18 @@ function App() {
                 },
               ]}
             />
+            <Surface
+              tone="neutral"
+              density="compact"
+              style={{ marginTop: '0.55rem', padding: '0.35rem', boxShadow: 'none' }}
+            >
+              <Grid columns="repeat(4, minmax(0, 1fr))" minItemWidth="90" gap="sm">
+                <Metric label="Projects" value={`${projects.length}`} tone="brand" density="compact" />
+                <Metric label="Tools" value={`${tools.length}`} tone="info" density="compact" />
+                <Metric label="Soft Skills" value={`${softSkills.length}`} tone="success" density="compact" />
+                <Metric label="Languages" value={`${languages.length}`} tone="neutral" density="compact" />
+              </Grid>
+            </Surface>
           </Section>
         </Grid>
       </Container>

@@ -9,6 +9,7 @@ export function Metric({
   change,
   description,
   tone,
+  density,
   syntax,
   slotSyntax,
   recipe,
@@ -30,6 +31,7 @@ export function Metric({
       className={cx(styles.metric, className)}
       style={{ ...rootSyntax.style, ...style }}
       data-tone={rootSyntax.semantics.tone ?? tone ?? recipe?.logic?.tone ?? 'neutral'}
+      data-density={rootSyntax.semantics.density ?? density ?? recipe?.logic?.density ?? 'comfortable'}
       data-slot={(props as Record<string, unknown>)['data-slot'] ?? 'metric'}
     >
       <div className={styles.metricLabel} style={labelSyntax.style} data-slot="metric-label">{label}</div>

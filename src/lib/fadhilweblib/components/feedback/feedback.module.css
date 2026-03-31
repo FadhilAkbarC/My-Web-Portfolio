@@ -150,11 +150,25 @@
 .metric {
   display: grid;
   gap: var(--fwlb-space-2);
-  padding: var(--fwlb-space-4);
+  padding: var(--fwlb-metric-padding, var(--fwlb-space-4));
   border: 1px solid var(--fwlb-border-soft);
   border-radius: var(--fwlb-radius-panel);
   background: var(--fwlb-surface-elevated);
   box-shadow: var(--fwlb-shadow-soft);
+}
+
+.metric[data-density='compact'] {
+  --fwlb-metric-padding: 0.38rem 0.62rem;
+  gap: 0.2rem;
+  border-radius: 0.72rem;
+}
+
+.metric[data-density='comfortable'] {
+  --fwlb-metric-padding: var(--fwlb-space-4);
+}
+
+.metric[data-density='spacious'] {
+  --fwlb-metric-padding: var(--fwlb-space-5);
 }
 
 .metricLabel {
@@ -165,12 +179,22 @@
   color: var(--fwlb-text-muted);
 }
 
+.metric[data-density='compact'] .metricLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
 .metricValue {
   font-size: clamp(1.45rem, 3vw, 2.4rem);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--fwlb-text-strong);
+}
+
+.metric[data-density='compact'] .metricValue {
+  font-size: clamp(0.88rem, 1.6vw, 1rem);
+  letter-spacing: -0.01em;
 }
 
 .keyValueList {

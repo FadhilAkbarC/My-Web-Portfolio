@@ -392,6 +392,7 @@ export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface MetricRecipeLogic {
   tone?: Tone;
+  density?: Density;
 }
 
 export interface MetricProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -400,6 +401,7 @@ export interface MetricProps extends React.HTMLAttributes<HTMLDivElement> {
   change?: React.ReactNode;
   description?: React.ReactNode;
   tone?: Tone;
+  density?: Density;
   syntax?: FadhilWebSyntax;
   slotSyntax?: SlotSyntax<'label' | 'value' | 'change' | 'description'>;
   recipe?: FadhilWebRecipe<'label' | 'value' | 'change' | 'description', MetricRecipeLogic>;
