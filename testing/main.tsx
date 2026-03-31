@@ -87,6 +87,8 @@ const contrastChecks = [
   ['textMuted vs panelDark', contrastRatio(futuristicPalette.textMuted, '#0a1028')],
 ];
 
+const aboutQuote = 'As a tech enthusiast and dedicated hobbyist developer, I am passionate about mastering Luau, TypeScript, and Python. While I hold a solid foundation in web fundamentals and JavaScript, I find genuine joy in constantly honing my craft. I thrive on refining my code and expanding my technical toolkit to build cleaner, more efficient solutions every day.';
+
 for (const [label, ratio] of contrastChecks) {
   if (ratio < 7) {
     throw new Error(`Contrast check failed for ${label}: ${ratio.toFixed(2)} (minimum 7.00).`);
@@ -187,12 +189,22 @@ function App() {
       <Container size="xl" style={{ paddingTop: '1rem', paddingBottom: '2rem' }}>
         <Section surface={false}>
           <HeaderShell
-            title="Fadhil Akbar Cariearsa | Testing Replica"
+            title="Fadhil Akbar Cariearsa"
           />
         </Section>
 
         <Grid columns="0.95fr 1.05fr" minItemWidth="320" gap="md">
-          <Section id="about-testing" title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python.">
+          <Section
+            id="about-testing"
+            title="About"
+            description={(
+              <span style={{ display: 'block', fontSize: '0.8rem', lineHeight: 1.45 }}>
+                <span style={{ color: 'var(--fwlb-text-accent)', fontWeight: 900 }}>&ldquo;</span>
+                {aboutQuote}
+                <span style={{ color: 'var(--fwlb-text-accent)', fontWeight: 900 }}>&rdquo;</span>
+              </span>
+            )}
+          >
             <Grid minItemWidth="130" gap="sm">
               {languages.map((language) => (
                 <Surface key={language} tone="neutral" density="compact">{language}</Surface>
