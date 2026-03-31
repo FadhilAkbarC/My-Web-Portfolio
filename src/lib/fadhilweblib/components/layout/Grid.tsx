@@ -18,6 +18,8 @@ export function Grid({
   columns,
   minItemWidth,
   gap = 'md',
+  rowGap,
+  columnGap,
   align,
   justify,
   syntax,
@@ -43,6 +45,8 @@ export function Grid({
       className={cx(styles.root, className)}
       style={{
         '--fwlb-gap': resolveSpaceValue(gap),
+        '--fwlb-row-gap': resolveSpaceValue(rowGap ?? gap),
+        '--fwlb-column-gap': resolveSpaceValue(columnGap ?? gap),
         gridTemplateColumns: templateColumns,
         ...rootSyntax.style,
         ...style,

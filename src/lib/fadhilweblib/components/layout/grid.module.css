@@ -2,6 +2,8 @@
   display: grid;
   min-width: 0;
   gap: var(--fwlb-gap, var(--fwlb-space-4));
+  row-gap: var(--fwlb-row-gap, var(--fwlb-gap, var(--fwlb-space-4)));
+  column-gap: var(--fwlb-column-gap, var(--fwlb-gap, var(--fwlb-space-4)));
 }
 
 .root[data-align='start'] {

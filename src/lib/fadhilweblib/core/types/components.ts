@@ -83,6 +83,8 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
   columns?: number | string;
   minItemWidth?: number | string;
   gap?: LayoutGap;
+  rowGap?: LayoutGap;
+  columnGap?: LayoutGap;
   align?: LayoutAlign;
   justify?: LayoutJustify;
   children?: React.ReactNode;

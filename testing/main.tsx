@@ -32,12 +32,6 @@ const tools = [
   ['Builder', 'F3X'],
   ['Toolkit', 'Lemonade'],
 ] as const;
-const languageRows = [
-  ['TypeScript', 'JavaScript'],
-  ['HTML', 'CSS'],
-  ['Luau', 'Lua'],
-  ['Python'],
-] as const;
 const projects = [
   ['MindMapper', 'https://MindMapper.qzz.io', '/images/Mindmapper.jpg', 'Built: Vercel · Railway · PostgreSQL · DB'],
   ['WebWorlds', 'https://webworlds.vercel.app', '/images/WebWorlds.jpg', 'Built: Vercel · Railway · PostgreSQL · DB'],
@@ -206,36 +200,32 @@ function App() {
               </span>
             )}
           >
-            <Grid columns="1fr" gap="sm">
-              {languageRows.map((row, rowIndex) => (
-                <Grid key={`language-row-${rowIndex}`} columns={`repeat(${row.length}, minmax(0, 1fr))`} gap="sm">
-                  {row.map((language) => (
-                    <Surface
-                      key={language}
-                      tone="neutral"
-                      density="compact"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        minHeight: '1.45rem',
-                        padding: '0.16rem 0.34rem',
-                        fontSize: '0.68rem',
-                        lineHeight: 1.1,
-                      }}
-                    >
-                      {language}
-                    </Surface>
-                  ))}
-                </Grid>
+            <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
+              {languages.map((language) => (
+                <Surface
+                  key={language}
+                  tone="neutral"
+                  density="compact"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    minHeight: '1.45rem',
+                    padding: '0.16rem 0.34rem',
+                    fontSize: '0.68rem',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {language}
+                </Surface>
               ))}
             </Grid>
 
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid minItemWidth="180" gap="sm">
+              <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
                 {tools.map(([category, name]) => (
-                  <Surface key={name} tone="utility" density="compact">
+                  <Surface key={name} tone="utility" density="compact" style={{ padding: '0.35rem' }}>
                     <KeyValueList items={[{ key: 'Category', value: category }, { key: 'Tool', value: name }]} />
                   </Surface>
                 ))}
@@ -243,9 +233,16 @@ function App() {
             </CollapsiblePanel>
 
             <CollapsiblePanel title="My Soft Skills" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid minItemWidth="140" gap="sm">
+              <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
                 {softSkills.map((skill) => (
-                  <Surface key={skill} tone="neutral" density="compact">{skill}</Surface>
+                  <Surface
+                    key={skill}
+                    tone="neutral"
+                    density="compact"
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '1.45rem', padding: '0.16rem 0.34rem', fontSize: '0.68rem', lineHeight: 1.1 }}
+                  >
+                    {skill}
+                  </Surface>
                 ))}
               </Grid>
             </CollapsiblePanel>
