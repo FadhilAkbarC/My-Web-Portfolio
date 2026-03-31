@@ -44,17 +44,13 @@ const projects = [
   ['Fadhil Profile', 'https://fadhil.qzz.io/', '/images/WebWorlds.jpg', 'Built: Vercel'],
 ] as const;
 
-const chipSyntax = 'surface(bg:surface(elevated), border:tone(brand, border), radius:14, shadow:shadow(panel)); spacing(px:10, py:8);';
-const projectSyntax = 'surface(bg:surface(base), border:tone(brand, border), radius:20, shadow:shadow(panel)); spacing(p:sm); layout(display:grid, gap:sm);';
-const docSyntax = 'surface(border:tone(brand, border), radius:16); spacing(p:md);';
-
 function Chip({ children }: { children: React.ReactNode }) {
-  return <Surface tone="neutral" density="compact" syntax={chipSyntax}>{children}</Surface>;
+  return <Surface tone="neutral" density="compact">{children}</Surface>;
 }
 
 function ProjectCard({ title, url, image, stack }: { title: string; url: string; image: string; stack: string }) {
   return (
-    <Surface tone="commercial" syntax={projectSyntax}>
+    <Surface tone="commercial">
       <StatusChip label={stack} tone="info" size="sm" />
       <img
         src={image}
@@ -63,7 +59,7 @@ function ProjectCard({ title, url, image, stack }: { title: string; url: string;
         decoding="async"
         style={{ width: '100%', borderRadius: '14px', aspectRatio: '16/9', objectFit: 'cover', border: '1px solid var(--fwlb-tone-brand-border)' }}
       />
-      <Button as="a" href={url} target="_blank" rel="noopener noreferrer" tone="brand" size="sm" syntax="layout(width:100%);">{url}</Button>
+      <Button as="a" href={url} target="_blank" rel="noopener noreferrer" tone="brand" size="sm">{url}</Button>
     </Surface>
   );
 }
@@ -78,9 +74,9 @@ function App() {
   const docs = (
     <Grid minItemWidth="220" gap="sm">
       {projects.slice(0, 3).map(([title, url]) => (
-        <Surface key={`${title}-docs`} tone="neutral" syntax={docSyntax}>
+        <Surface key={`${title}-docs`} tone="neutral">
           <Metric label={title} value="Documentation" tone="brand" />
-          <Button as="a" href={url} target="_blank" rel="noopener noreferrer" tone="neutral" size="sm" syntax="spacing(mt:sm); layout(width:100%);">Open Link</Button>
+          <Button as="a" href={url} target="_blank" rel="noopener noreferrer" tone="neutral" size="sm">Open Link</Button>
         </Surface>
       ))}
     </Grid>
@@ -94,16 +90,14 @@ function App() {
   ] as const;
 
   return (
-    <ThemeScope theme="portfolio" syntax="layout(minH:100dvh); surface(bg:gradient(155deg, #090f1f, #111a31 45%, #1e1530)); spacing(py:lg);">
-      <Container size="xl" syntax="layout(maxW:1200); spacing(px:md);">
+    <ThemeScope theme="portfolio">
+      <Container size="xl">
         <Breadcrumbs
           items={[{ label: 'Home', href: '/' }, { label: 'Testing', current: true }]}
           ariaLabel="Hidden testing breadcrumb"
-          syntax="spacing(mb:sm);"
         />
         <Section
           surface={false}
-          syntax="spacing(mb:md);"
           actions={<ActionGroup align="end" wrap><Button as="a" href="#portfolio-testing" tone="neutral" size="sm">Portfolio</Button><Button as="a" href="mailto:FadhilAkbarCariearsaIndonesia@gmail.com" tone="brand" size="sm">Contact</Button></ActionGroup>}
         >
           <HeaderShell
@@ -111,11 +105,10 @@ function App() {
             title="Fadhil Akbar Cariearsa — Testing Portfolio"
             subtitle="Visual rework 100% fadhilweblib (akses manual via /testing)."
             meta={<StatusChip tone="success" label="Testing Only" />}
-            syntax="surface(bg:surface(base), border:tone(brand, border), radius:24, shadow:shadow(floating)); spacing(p:lg);"
           />
         </Section>
 
-        <Grid minItemWidth="160" gap="sm" syntax="spacing(mb:md);">
+        <Grid minItemWidth="160" gap="sm">
           <Metric label="Projects" value={`${projects.length}`} tone="brand" />
           <Metric label="Tools" value={`${tools.length}`} tone="info" />
           <Metric label="Soft Skills" value={`${softSkills.length}`} tone="success" />
@@ -123,29 +116,29 @@ function App() {
         </Grid>
 
         <Grid columns="minmax(0,1fr) minmax(0,1fr)" minItemWidth="320" gap="md">
-          <Section title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python." syntax="layout(h:100%);" slotSyntax={{ description: 'text(fs:15, fg:text(muted));' }}>
+          <Section title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python.">
             <Notice tone="info" title="Mode" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /testing (alias /Testing)." />
-            <Grid minItemWidth="120" gap="sm" syntax="spacing(mt:sm);">{languages.map((language) => <Chip key={language}>{language}</Chip>)}</Grid>
-            <Surface tone="neutral" syntax="spacing(mt:sm, p:sm); surface(border:tone(info, border), radius:16);">
+            <Grid minItemWidth="120" gap="sm">{languages.map((language) => <Chip key={language}>{language}</Chip>)}</Grid>
+            <Surface tone="neutral">
               <Metric label="Portfolio Rework" value="fadhilweblib 100%" tone="info" />
-              <Grid minItemWidth="160" gap="sm" syntax="spacing(mt:sm);">
+              <Grid minItemWidth="160" gap="sm">
                 {skillProgress.map(([label, value]) => (
                   <ProgressBar key={label} label={label} value={value} max={100} tone="brand" />
                 ))}
               </Grid>
             </Surface>
 
-            <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false} syntax="spacing(mt:md);" slotSyntax={{ content: 'spacing(pt:sm);' }}>
+            <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false}>
               <Grid minItemWidth="180" gap="sm">
                 {tools.map(([category, name]) => (
-                  <Surface key={name} tone="utility" density="compact" syntax="surface(border:tone(info, border), radius:14); spacing(p:sm);">
+                  <Surface key={name} tone="utility" density="compact">
                     <KeyValueList items={[{ key: 'Category', value: category }, { key: 'Tool', value: name }]} />
                   </Surface>
                 ))}
               </Grid>
             </CollapsiblePanel>
 
-            <CollapsiblePanel title="My Soft Skills" summary="Klik untuk expand" defaultOpen={false} syntax="spacing(mt:sm);" slotSyntax={{ content: 'spacing(pt:sm);' }}>
+            <CollapsiblePanel title="My Soft Skills" summary="Klik untuk expand" defaultOpen={false}>
               <Grid minItemWidth="140" gap="sm">{softSkills.map((skill) => <Chip key={skill}>{skill}</Chip>)}</Grid>
             </CollapsiblePanel>
           </Section>
@@ -170,7 +163,6 @@ function App() {
                   ),
                 },
               ]}
-              slotSyntax={{ list: 'spacing(mb:sm);', panel: 'layout(minH:420);' }}
             />
           </Section>
         </Grid>
