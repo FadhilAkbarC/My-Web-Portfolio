@@ -98,20 +98,20 @@ const contrastChecks = [
 ];
 
 const aboutQuote = 'As a tech enthusiast and dedicated hobbyist developer, I am passionate about mastering Luau, TypeScript, and Python. While I hold a solid foundation in web fundamentals and JavaScript, I find genuine joy in constantly honing my craft. I thrive on refining my code and expanding my technical toolkit to build cleaner, more efficient solutions every day.';
-const uniformMinItemWidth = '156';
+const uniformMinItemWidth = '112';
 const uniformTileStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
   width: '100%',
-  minHeight: '1.68rem',
-  padding: '0.08rem 0.22rem',
-  fontSize: '0.52rem',
-  lineHeight: 1,
+  minHeight: '1.22rem',
+  padding: '0.04rem 0.14rem',
+  fontSize: '0.46rem',
+  lineHeight: 0.98,
   maxWidth: '100%',
-  overflow: 'hidden',
-  wordBreak: 'break-word',
+  overflow: 'visible',
+  overflowWrap: 'anywhere',
 };
 
 for (const [label, ratio] of contrastChecks) {
@@ -326,10 +326,10 @@ function App() {
                 {tools.map(([category, name]) => (
                   <Surface key={name} tone="utility" density="compact" style={uniformTileStyle}>
                     <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0, width: '100%' }}>
-                      <div style={{ fontSize: '0.44rem', lineHeight: 1, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
+                      <div style={{ fontSize: '0.4rem', lineHeight: 0.95, letterSpacing: '0.015em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
                         {category}
                       </div>
-                      <div style={{ fontSize: '0.5rem', lineHeight: 1, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
+                      <div style={{ fontSize: '0.44rem', lineHeight: 0.95, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
                         {name}
                       </div>
                     </div>
