@@ -67,7 +67,45 @@ const projectGrid = (keyPrefix = '') => (
 
 function App() {
   return (
-    <ThemeScope theme="commercial" debugTitle="Testing UI gagal dirender">
+    <ThemeScope
+      theme="game"
+      debugTitle="Testing UI gagal dirender"
+      style={{
+        minHeight: '100vh',
+        background:
+          'radial-gradient(circle at 18% 10%, rgba(34,211,238,0.2), transparent 35%), radial-gradient(circle at 82% 0%, rgba(99,102,241,0.25), transparent 42%), linear-gradient(160deg, #020617 0%, #05081a 55%, #0a1028 100%)',
+        color: '#f8fbff',
+        '--fwlb-surface-base': 'linear-gradient(180deg, rgba(6, 10, 28, 0.97), rgba(2, 6, 23, 0.97))',
+        '--fwlb-surface-elevated': 'linear-gradient(180deg, rgba(10, 16, 38, 0.98), rgba(4, 8, 24, 0.98))',
+        '--fwlb-surface-muted': 'rgba(10, 20, 48, 0.78)',
+        '--fwlb-border-soft': 'rgba(159, 247, 255, 0.55)',
+        '--fwlb-border-strong': 'rgba(186, 230, 253, 0.85)',
+        '--fwlb-text-strong': '#f8fbff',
+        '--fwlb-text-soft': '#ecfeff',
+        '--fwlb-text-muted': '#c9edff',
+        '--fwlb-text-accent': '#67e8f9',
+        '--fwlb-tone-neutral-bg': 'linear-gradient(180deg, rgba(8, 15, 36, 0.98), rgba(4, 8, 26, 0.98))',
+        '--fwlb-tone-neutral-fg': '#f8fbff',
+        '--fwlb-tone-neutral-border': 'rgba(186, 230, 253, 0.82)',
+        '--fwlb-tone-brand-bg': 'linear-gradient(135deg, rgba(30, 64, 175, 0.98), rgba(34, 211, 238, 0.95))',
+        '--fwlb-tone-brand-fg': '#f8fbff',
+        '--fwlb-tone-brand-border': 'rgba(224, 242, 254, 0.98)',
+        '--fwlb-tone-info-bg': 'linear-gradient(135deg, rgba(67, 56, 202, 0.96), rgba(56, 189, 248, 0.94))',
+        '--fwlb-tone-info-fg': '#f8fbff',
+        '--fwlb-tone-info-border': 'rgba(224, 242, 254, 0.96)',
+        '--fwlb-button-default-box-shadow': 'none',
+        '--fwlb-button-hover-box-shadow': 'none',
+        '--fwlb-button-active-box-shadow': 'none',
+        '--fwlb-button-focus-box-shadow': 'none',
+        '--fwlb-button-open-box-shadow': 'none',
+        '--fwlb-button-current-state-box-shadow': 'none',
+        '--fwlb-button-loading-box-shadow': 'none',
+        '--fwlb-button-disabled-box-shadow': 'none',
+        '--fwlb-button-hover-transform': 'none',
+        '--fwlb-button-active-transform': 'none',
+        '--fwlb-button-focus-ring-width': '2px',
+      } as React.CSSProperties}
+    >
       <Surface
         tone="neutral"
         style={{
