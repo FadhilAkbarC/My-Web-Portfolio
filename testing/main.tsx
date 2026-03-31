@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../src/lib/fadhilweblib/styles/theme.css';
-import { Button, CollapsiblePanel, Tabs } from '../src/lib/fadhilweblib/client';
+import {
+  applyHeroPriorityHint,
+  applyZeroJankMotion,
+  Button,
+  CollapsiblePanel,
+  createAdaptiveHydrationEngine,
+  detectSmartMediaProfile,
+  enableSpeculativeNavigation,
+  installGhostPlaceholder,
+  resolveSmartMediaSource,
+  Tabs,
+  type SmartMediaProfile,
+} from '../src/lib/fadhilweblib/client';
 import {
   ActionGroup,
   Container,
@@ -93,15 +105,26 @@ for (const [label, ratio] of contrastChecks) {
   }
 }
 
-function ProjectCard({ title, url, image, stack }: { title: string; url: string; image: string; stack: string }) {
+function ProjectCard({ title, url, image, stack, mediaProfile }: { title: string; url: string; image: string; stack: string; mediaProfile: SmartMediaProfile | null }) {
+  const resolvedImage = useMemo(
+    () => resolveSmartMediaSource(
+      { avif: undefined, webp: undefined, fallback: image },
+      mediaProfile ?? { format: 'webp', networkTier: 'unknown', saveData: false, allowVideoBackground: true, fetchPriority: 'auto' }
+    ),
+    [image, mediaProfile]
+  );
+
   return (
-    <Surface tone="neutral" style={{ display: 'grid', gap: '0.6rem' }}>
+    <Surface tone="neutral" style={{ display: 'grid', gap: '0.6rem' }} data-project-card>
       <StatusChip label="Stack" value={stack} tone="info" />
       <img
-        src={image}
+        data-src={resolvedImage}
+        data-placeholder-color="#0f172a"
         alt={`${title} preview`}
         loading="lazy"
         decoding="async"
+        width={1600}
+        height={900}
         style={{ width: '100%', borderRadius: '12px', aspectRatio: '16/9', objectFit: 'cover', border: '1px solid var(--fwlb-border-soft)' }}
       />
       <Button as="a" href={url} target="_blank" rel="noopener noreferrer" tone="brand" size="sm">Open {title}</Button>
@@ -109,15 +132,84 @@ function ProjectCard({ title, url, image, stack }: { title: string; url: string;
   );
 }
 
-const projectGrid = (keyPrefix = '') => (
+const projectGrid = (mediaProfile: SmartMediaProfile | null, keyPrefix = '') => (
   <Grid minItemWidth="240" gap="sm">
     {projects.map(([title, url, image, stack]) => (
-      <ProjectCard key={`${keyPrefix}${title}`} title={title} url={url} image={image} stack={stack} />
+      <ProjectCard key={`${keyPrefix}${title}`} title={title} url={url} image={image} stack={stack} mediaProfile={mediaProfile} />
     ))}
   </Grid>
 );
 
 function App() {
+  const [mediaProfile, setMediaProfile] = useState<SmartMediaProfile | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const cleanups: Array<() => void> = [];
+    let aboutMotionCleanup: (() => void) | null = null;
+
+    void detectSmartMediaProfile().then((profile) => {
+      if (!isMounted) {
+        return;
+      }
+
+      setMediaProfile(profile);
+      const heroImage = document.querySelector<HTMLImageElement>('#portfolio-testing img[data-src]');
+      if (heroImage) {
+        applyHeroPriorityHint(heroImage, profile);
+      }
+    });
+
+    cleanups.push(installGhostPlaceholder('img[data-src]').disconnect);
+    cleanups.push(enableSpeculativeNavigation({ hoverDelayMs: 150, cardSelector: '[data-project-card]' }));
+    cleanups.push(
+      createAdaptiveHydrationEngine(
+        [
+          {
+            selector: '[data-about-interactive]',
+            loader: async () => {
+              if (aboutMotionCleanup) {
+                return;
+              }
+
+              const motionTargets = document.querySelectorAll<HTMLElement>('[data-scroll-motion]');
+              const onScroll = () => {
+                const viewportHeight = Math.max(window.innerHeight, 1);
+                for (const target of motionTargets) {
+                  const rect = target.getBoundingClientRect();
+                  const progress = Math.min(1, Math.max(0, 1 - rect.top / viewportHeight));
+                  applyZeroJankMotion(target, progress, {
+                    keyframes: [
+                      { progress: 0, y: 24, opacity: 0.4, scale: 0.98 },
+                      { progress: 1, y: 0, opacity: 1, scale: 1 },
+                    ],
+                  });
+                }
+              };
+
+              onScroll();
+              window.addEventListener('scroll', onScroll, { passive: true });
+              aboutMotionCleanup = () => {
+                window.removeEventListener('scroll', onScroll);
+              };
+            },
+          },
+        ],
+        { threshold: 0.2 }
+      )
+    );
+
+    return () => {
+      isMounted = false;
+      for (const cleanup of cleanups) {
+        cleanup();
+      }
+      if (aboutMotionCleanup) {
+        aboutMotionCleanup();
+      }
+    };
+  }, []);
+
   return (
     <ThemeScope
       theme="game"
@@ -192,8 +284,9 @@ function App() {
             id="about-testing"
             eyebrow="Fadhil Akbar Cariearsa"
             title="About me"
+            data-about-interactive
             description={(
-              <span style={{ display: 'block', fontSize: '0.8rem', lineHeight: 1.45 }}>
+              <span style={{ display: 'block', fontSize: '0.8rem', lineHeight: 1.45 }} data-scroll-motion>
                 <span style={{ color: 'var(--fwlb-text-accent)', fontWeight: 900 }}>&ldquo;</span>
                 {aboutQuote}
                 <span style={{ color: 'var(--fwlb-text-accent)', fontWeight: 900 }}>&rdquo;</span>
@@ -259,12 +352,17 @@ function App() {
           </Section>
 
           <Section id="portfolio-testing" title="My Learning Portfolio">
+            <StatusChip
+              label="Media"
+              value={mediaProfile ? `${mediaProfile.format.toUpperCase()} · ${mediaProfile.networkTier}` : 'Detecting'}
+              tone={mediaProfile?.allowVideoBackground === false ? 'warning' : 'info'}
+            />
             <Tabs
               defaultValue="projects"
               keepMounted
               items={[
-                { value: 'projects', label: 'Projects', content: projectGrid() },
-                { value: 'image', label: 'Image', content: projectGrid('image-') },
+                { value: 'projects', label: 'Projects', content: projectGrid(mediaProfile) },
+                { value: 'image', label: 'Image', content: projectGrid(mediaProfile, 'image-') },
                 {
                   value: 'docs',
                   label: 'Documentation',
