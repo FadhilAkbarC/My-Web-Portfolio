@@ -6,7 +6,6 @@ import {
   ActionGroup,
   Container,
   Grid,
-  HeaderShell,
   KeyValueList,
   Metric,
   Section,
@@ -32,6 +31,12 @@ const tools = [
   ['AI Tool', 'Codex'],
   ['Builder', 'F3X'],
   ['Toolkit', 'Lemonade'],
+] as const;
+const languageRows = [
+  ['TypeScript', 'JavaScript'],
+  ['HTML', 'CSS'],
+  ['Luau', 'Lua'],
+  ['Python'],
 ] as const;
 const projects = [
   ['MindMapper', 'https://MindMapper.qzz.io', '/images/Mindmapper.jpg', 'Built: Vercel · Railway · PostgreSQL · DB'],
@@ -186,12 +191,7 @@ function App() {
         </Container>
       </Surface>
 
-      <Container size="xl" style={{ paddingTop: '1rem', paddingBottom: '2rem' }}>
-        <Section surface={false}>
-          <HeaderShell
-            title="Fadhil Akbar Cariearsa"
-          />
-        </Section>
+      <Container size="xl" style={{ paddingTop: '0.55rem', paddingBottom: '1.6rem' }}>
 
         <Grid columns="0.95fr 1.05fr" minItemWidth="320" gap="md">
           <Section
@@ -206,25 +206,29 @@ function App() {
               </span>
             )}
           >
-            <Grid columns="repeat(2, minmax(0, 1fr))" gap="sm">
-              {languages.map((language) => (
-                <Surface
-                  key={language}
-                  tone="neutral"
-                  density="compact"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center',
-                    minHeight: '1.45rem',
-                    padding: '0.16rem 0.34rem',
-                    fontSize: '0.68rem',
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {language}
-                </Surface>
+            <Grid columns="1fr" gap="sm">
+              {languageRows.map((row, rowIndex) => (
+                <Grid key={`language-row-${rowIndex}`} columns={`repeat(${row.length}, minmax(0, 1fr))`} gap="sm">
+                  {row.map((language) => (
+                    <Surface
+                      key={language}
+                      tone="neutral"
+                      density="compact"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        minHeight: '1.45rem',
+                        padding: '0.16rem 0.34rem',
+                        fontSize: '0.68rem',
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {language}
+                    </Surface>
+                  ))}
+                </Grid>
               ))}
             </Grid>
 
