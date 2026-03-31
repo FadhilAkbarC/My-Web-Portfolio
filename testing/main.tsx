@@ -9,7 +9,6 @@ import {
   HeaderShell,
   KeyValueList,
   Metric,
-  Notice,
   Section,
   StatusChip,
   Surface,
@@ -168,6 +167,8 @@ function App() {
           borderLeft: 'none',
           borderRight: 'none',
           borderTop: 'none',
+          padding: '0.2rem 0',
+          minHeight: '2.1rem',
           backdropFilter: 'blur(10px)',
         }}
       >
@@ -175,23 +176,18 @@ function App() {
           <ActionGroup align="center" justify="between" wrap>
             <StatusChip label="Secret" value="/testing" tone="warning" />
             <ActionGroup align="center" wrap>
-              <Button as="a" href="#about-testing" tone="neutral" size="sm">About</Button>
-              <Button as="a" href="#portfolio-testing" tone="neutral" size="sm">Portfolio</Button>
-              <Button as="a" href="mailto:FadhilAkbarCariearsaIndonesia@gmail.com" tone="brand" size="sm">Contact</Button>
+              <Button as="a" href="#about-testing" tone="neutral" size="xs">About</Button>
+              <Button as="a" href="#portfolio-testing" tone="neutral" size="xs">Portfolio</Button>
+              <Button as="a" href="mailto:FadhilAkbarCariearsaIndonesia@gmail.com" tone="brand" size="xs">Contact</Button>
             </ActionGroup>
           </ActionGroup>
         </Container>
       </Surface>
 
       <Container size="xl" style={{ paddingTop: '1rem', paddingBottom: '2rem' }}>
-        <Section
-          surface={false}
-          actions={<StatusChip label="Mode" value="Hidden Testing" tone="success" />}
-        >
+        <Section surface={false}>
           <HeaderShell
-            eyebrow="Replica Mode"
             title="Fadhil Akbar Cariearsa | Testing Replica"
-            subtitle="Replikasi konten utama fadhil.qzz.io memakai 100% komponen fadhilweblib dengan kontrol layout penuh."
           />
         </Section>
 
@@ -204,8 +200,6 @@ function App() {
 
         <Grid columns="0.95fr 1.05fr" minItemWidth="320" gap="md">
           <Section id="about-testing" title="About" description="I am currently learning TypeScript, JavaScript, HTML, CSS, Luau, Lua, and Python.">
-            <Notice tone="info" title="Akses Rahasia" description="Halaman ini tersembunyi dan hanya bisa diakses manual via URL /testing." />
-
             <Grid minItemWidth="130" gap="sm">
               {languages.map((language) => (
                 <Surface key={language} tone="neutral" density="compact">{language}</Surface>
@@ -231,7 +225,7 @@ function App() {
             </CollapsiblePanel>
           </Section>
 
-          <Section id="portfolio-testing" title="My Learning Portfolio" description="Replikasi tab portfolio utama.">
+          <Section id="portfolio-testing" title="My Learning Portfolio">
             <Tabs
               defaultValue="projects"
               keepMounted
