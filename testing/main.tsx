@@ -6,7 +6,6 @@ import {
   ActionGroup,
   Container,
   Grid,
-  KeyValueList,
   Metric,
   Section,
   StatusChip,
@@ -230,14 +229,14 @@ function App() {
               <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
                 {tools.map(([category, name]) => (
                   <Surface key={name} tone="utility" density="compact" style={{ padding: '0.28rem', minHeight: '1.95rem', maxWidth: '100%', overflow: 'hidden' }}>
-                    <KeyValueList
-                      items={[{ label: 'Category', value: category }, { label: 'Tool', value: name }]}
-                      slotSyntax={{
-                        item: { style: { padding: '0.1rem 0' } },
-                        label: { style: { fontSize: '0.58rem', lineHeight: 1.2, letterSpacing: '0.02em', overflowWrap: 'anywhere' } },
-                        value: { style: { fontSize: '0.62rem', lineHeight: 1.2, overflowWrap: 'anywhere', textAlign: 'left' } },
-                      }}
-                    />
+                    <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0 }}>
+                      <div style={{ fontSize: '0.56rem', lineHeight: 1.2, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
+                        {category}
+                      </div>
+                      <div style={{ fontSize: '0.62rem', lineHeight: 1.2, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
+                        {name}
+                      </div>
+                    </div>
                   </Surface>
                 ))}
               </Grid>
