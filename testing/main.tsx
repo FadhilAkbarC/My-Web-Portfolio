@@ -98,6 +98,21 @@ const contrastChecks = [
 ];
 
 const aboutQuote = 'As a tech enthusiast and dedicated hobbyist developer, I am passionate about mastering Luau, TypeScript, and Python. While I hold a solid foundation in web fundamentals and JavaScript, I find genuine joy in constantly honing my craft. I thrive on refining my code and expanding my technical toolkit to build cleaner, more efficient solutions every day.';
+const uniformGridColumns = 'repeat(auto-fit, minmax(130px, 1fr))';
+const uniformTileStyle: React.CSSProperties = {
+  display: 'grid',
+  alignContent: 'center',
+  justifyItems: 'center',
+  textAlign: 'center',
+  width: '100%',
+  minHeight: '2.8rem',
+  padding: '0.24rem 0.4rem',
+  fontSize: '0.62rem',
+  lineHeight: 1.15,
+  maxWidth: '100%',
+  overflow: 'hidden',
+  wordBreak: 'break-word',
+};
 
 for (const [label, ratio] of contrastChecks) {
   if (ratio < 7) {
@@ -293,25 +308,13 @@ function App() {
               </span>
             )}
           >
-            <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
+            <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
               {languages.map((language) => (
                 <Surface
                   key={language}
                   tone="neutral"
                   density="compact"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center',
-                    minHeight: '1.45rem',
-                    padding: '0.16rem 0.34rem',
-                    fontSize: '0.68rem',
-                    lineHeight: 1.1,
-                    maxWidth: '100%',
-                    overflow: 'hidden',
-                    wordBreak: 'break-word',
-                  }}
+                  style={uniformTileStyle}
                 >
                   {language}
                 </Surface>
@@ -319,14 +322,14 @@ function App() {
             </Grid>
 
             <CollapsiblePanel title="Tools and Frameworks I Use" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
+              <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
                 {tools.map(([category, name]) => (
-                  <Surface key={name} tone="utility" density="compact" style={{ padding: '0.28rem', minHeight: '1.95rem', maxWidth: '100%', overflow: 'hidden' }}>
-                    <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0 }}>
-                      <div style={{ fontSize: '0.56rem', lineHeight: 1.2, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
+                  <Surface key={name} tone="utility" density="compact" style={uniformTileStyle}>
+                    <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0, width: '100%' }}>
+                      <div style={{ fontSize: '0.52rem', lineHeight: 1.1, letterSpacing: '0.02em', color: 'var(--fwlb-text-muted)', overflowWrap: 'anywhere' }}>
                         {category}
                       </div>
-                      <div style={{ fontSize: '0.62rem', lineHeight: 1.2, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
+                      <div style={{ fontSize: '0.6rem', lineHeight: 1.1, color: 'var(--fwlb-text-strong)', overflowWrap: 'anywhere' }}>
                         {name}
                       </div>
                     </div>
@@ -336,13 +339,13 @@ function App() {
             </CollapsiblePanel>
 
             <CollapsiblePanel title="My Soft Skills" summary="Klik untuk expand" defaultOpen={false}>
-              <Grid columns="repeat(4, minmax(0, 1fr))" rowGap="sm" columnGap="sm">
+              <Grid columns={uniformGridColumns} rowGap="sm" columnGap="sm">
                 {softSkills.map((skill) => (
                   <Surface
                     key={skill}
                     tone="neutral"
                     density="compact"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', minHeight: '1.45rem', padding: '0.16rem 0.28rem', fontSize: '0.62rem', lineHeight: 1.1, maxWidth: '100%', overflow: 'hidden', wordBreak: 'break-word' }}
+                    style={uniformTileStyle}
                   >
                     {skill}
                   </Surface>
